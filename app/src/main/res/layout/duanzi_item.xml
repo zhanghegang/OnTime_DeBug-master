@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:orientation="vertical"
+    android:padding="@dimen/x30"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    android:paddingRight="@dimen/x30"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:scaleType="centerCrop"
+        android:layout_width="@dimen/x120"
+        android:id="@+id/iv_duanzi_userhead"
+        app:roundAsCircle="true"
+
+        android:layout_height="@dimen/y120" />
+    <LinearLayout
+        android:gravity="center_vertical"
+android:padding="@dimen/x15"
+
+        android:orientation="vertical"
+        android:layout_width="@dimen/x200"
+        android:layout_height="match_parent">
+        <TextView
+            android:text="名字"
+            android:maxLines="1"
+            android:ellipsize="end"
+       android:paddingBottom="@dimen/x15"
+android:textColor="@color/duanzi_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_duanzi_name"
+            />
+        <TextView
+            android:text="时间"
+android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/duanzi_time"
+            android:layout_width="@dimen/x200"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_duanzi_time"
+            />
+    </LinearLayout>
+    <RelativeLayout
+
+        android:gravity="right"
+
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y120">
+
+
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:id="@+id/ll_duanzi_msg"
+                android:gravity="center"
+                android:orientation="vertical"
+
+                android:layout_height="@dimen/y120">
+        <ImageView
+            android:id="@+id/iv_duanzi_msg"
+            android:src="@drawable/item_comment"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x60"
+
+            />
+                <TextView
+                    android:id="@+id/tv_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="111"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:id="@+id/ll_duanzi_share"
+                android:gravity="center"
+                android:orientation="vertical"
+              android:layout_width="wrap_content"
+                android:layout_height="@dimen/y120">
+
+                <ImageView
+                    android:id="@+id/iv_duanzi_share"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/x60"
+                    android:src="@drawable/item_share"
+
+                    />
+                <TextView
+                    android:id="@+id/tv_duanzi_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:id="@+id/ll_duanzi_guanzhu"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y120">
+                <ImageView
+                    android:id="@+id/iv_duanzi_guanzhu"
+                    android:src="@drawable/item_love"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/x60"
+
+                    />
+                <TextView
+                    android:id="@+id/tv_duanzi_guanzhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    />
+            </LinearLayout>
+        <LinearLayout
+
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:id="@+id/ll_duanzi_jia"
+
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x120">
+            <ImageView
+                android:id="@+id/iv_duanzi_jia"
+                android:src="@drawable/item_jia"
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60" />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>
+    <TextView
+        android:textColor="@color/duanzi_time"
+        android:textSize="@dimen/x30"
+        android:text="段子ddd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxHeight="@dimen/x200"
+        android:id="@+id/tv_duanzi_content"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_statin_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+</LinearLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.stx.xhb.xbanner.XBanner
+        android:id="@+id/hot_xbanner"
+app:isAutoPlay="true"
+        app:pointsVisibility="true"
+        app:AutoPlayTime="1500"
+
+        app:pointsPosition="CENTER"
+        app:isShowNumberIndicator="false"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x300"
+        ></com.stx.xhb.xbanner.XBanner>
+
+</LinearLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="reg_white">#fff</color>
+    <color name="wel">#f66</color>
+    <color name="qq">#0099ff</color>
+    <color name="weichat">#339933</color>
+    <color name="edit_bg">#80987654</color>
+    <color name="edit_middle">#eee</color>
+    <color name="edit_name">#ddd</color>
+    <color name="btn_other_reg_bg">#ffcc66</color>
+    <color name="main_head">#0099ff</color>
+    <color name="main_title">#fff</color>
+    <color name="main_title_night">#000</color>
+    <color name="night_bg">#fcc</color>
+    <color name="left_name_bg">#fff</color>
+    <color name="menu_tv_bg">#000000</color>
+    <color name="thumb_normal">#cccccc</color>
+    <color name="thumb_select">#00ff00</color>
+    <color name="duanzi_name">#ff0000</color>
+    <color name="duanzi_time">#000000</color>
+    <color name="hot_title">#000000</color>
+    <color name="hot_white">#ffffff</color>
+</resources>

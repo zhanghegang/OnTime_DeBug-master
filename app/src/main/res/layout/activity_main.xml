@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:orientation="vertical"
+   android:id="@+id/dl_pager"
+    tools:context="zhanghegang.com.bawei.onetime.MainActivity">
+
+   <!-- <FrameLayout
+        android:clickable="true"
+        android:layout_gravity="start"
+        android:id="@+id/fl_left"
+        android:background="#f00"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+<zhanghegang.com.bawei.onetime.autoview.UpdateTitleView
+    android:id="@+id/update_title"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x100">
+
+</zhanghegang.com.bawei.onetime.autoview.UpdateTitleView>
+<FrameLayout
+
+    android:id="@+id/fl_main"
+android:layout_weight="1"
+    android:layout_width="match_parent"
+    android:layout_height="0dp">
+
+
+</FrameLayout>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        <LinearLayout
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="3dp"
+            android:gravity="center"
+            android:id="@+id/ll_tuijian"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="55dp">
+            <ImageView
+                android:id="@+id/iv_tuijian"
+                android:src="@drawable/tuijian_select"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:id="@+id/tv_tuijian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="推荐"
+                android:textColor="@color/main_head"
+                android:textSize="13sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="3dp"
+            android:gravity="center"
+            android:id="@+id/ll_duanzi"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="55dp">
+            <ImageView
+                android:id="@+id/iv_duanzi"
+                android:src="@drawable/duanzi_normal"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:textSize="13sp"
+                android:id="@+id/tv_dianzi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="段子"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="3dp"
+            android:gravity="center"
+            android:id="@+id/ll_video"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="55dp">
+            <ImageView
+                android:id="@+id/iv_vedio"
+                android:src="@drawable/video_normal"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:textSize="13sp"
+                android:id="@+id/tv_vedio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="视频"
+                />
+        </LinearLayout>
+    </LinearLayout>
+        </LinearLayout>
+</LinearLayout>
+
+

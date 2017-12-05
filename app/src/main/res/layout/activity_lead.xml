@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="zhanghegang.com.bawei.onetime.LeadActivity">
+<ImageView
+    android:layout_centerVertical="true"
+    android:scaleType="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+android:src="@drawable/welcom"
+    android:id="@+id/iv_reg"
+    />
+    <ImageView
+        android:layout_marginTop="@dimen/x50"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/logo"
+        />
+
+    <TextView
+        android:id="@+id/tv_wel"
+        android:layout_width="@dimen/x250"
+        android:layout_height="@dimen/y70"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/wel"
+        android:gravity="center"
+        android:text="欢迎进入"
+        android:textColor="@color/reg_white" />
+</RelativeLayout>

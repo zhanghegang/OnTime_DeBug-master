@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/x30"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:paddingRight="@dimen/x30"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:scaleType="centerCrop"
+            android:layout_width="@dimen/x120"
+            android:id="@+id/iv_hot_userhead"
+            app:roundAsCircle="true"
+
+            android:layout_height="@dimen/y120" />
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:padding="@dimen/x15"
+
+            android:orientation="vertical"
+            android:layout_width="@dimen/x200"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="名字"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:paddingBottom="@dimen/x15"
+                android:textColor="@color/duanzi_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_duanzi_name"
+                />
+            <TextView
+                android:text="时间"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/duanzi_time"
+                android:layout_width="@dimen/x200"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_duanzi_time"
+                />
+        </LinearLayout>
+        <RelativeLayout
+
+            android:gravity="right"
+
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y120">
+
+
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:id="@+id/ll_pingbi"
+                android:gravity="center"
+                android:orientation="vertical"
+
+                android:layout_height="@dimen/y120">
+                <ImageView
+                    android:id="@+id/iv_hot_pingbi"
+                    android:src="@drawable/pinbi"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/x60"
+
+                    />
+                <TextView
+                    android:id="@+id/tv_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="屏蔽"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:id="@+id/ll_link"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y120">
+
+                <ImageView
+                    android:id="@+id/iv_hot_link"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/x60"
+                    android:src="@drawable/copylink1"
+
+                    />
+                <TextView
+                    android:id="@+id/tv_duanzi_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="链接"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:id="@+id/ll_tanhao"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y120">
+                <ImageView
+                    android:id="@+id/iv_tanhao"
+                    android:src="@drawable/tanhao"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/x60"
+
+                    />
+                <TextView
+                    android:id="@+id/tv_duanzi_guanzhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="举报"
+                    />
+            </LinearLayout>
+            <LinearLayout
+
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:id="@+id/ll_duanzi_jia"
+
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x120">
+                <ImageView
+                    android:id="@+id/iv_duanzi_jia"
+                    android:src="@drawable/item_jia"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/x60" />
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView
+        android:textColor="@color/hot_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_hot_title"
+        android:text="标题"
+        />
+
+   <RelativeLayout
+      android:id="@+id/hot_before"
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/y330"
+       >
+       <include layout="@layout/hot_vedio"></include>
+
+       <LinearLayout
+           android:padding="@dimen/x5"
+           android:id="@+id/ll_hot_menu"
+        android:layout_alignParentRight="true"
+           android:orientation="vertical"
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent">
+           <LinearLayout
+               android:layout_weight="1"
+               android:orientation="vertical"
+               android:layout_width="wrap_content"
+               android:layout_height="0dp">
+               <ImageView
+                   android:id="@+id/hot_heart"
+                   android:layout_width="@dimen/x40"
+                   android:layout_height="@dimen/x40"
+                   android:src="@drawable/heart"
+                   />
+               <TextView
+                   android:id="@+id/tv_hot_heart"
+                   android:textColor="@color/hot_white"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="111"
+                   />
+           </LinearLayout>
+           <LinearLayout
+               android:layout_weight="1"
+               android:orientation="vertical"
+               android:layout_width="wrap_content"
+               android:layout_height="0dp">
+               <ImageView
+                   android:id="@+id/hot_start"
+                   android:layout_width="@dimen/x40"
+                   android:layout_height="@dimen/x40"
+                   android:src="@drawable/start_hot"
+                   />
+               <TextView
+                   android:id="@+id/tv_hot_start"
+                   android:textColor="@color/hot_white"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="111"
+                   />
+           </LinearLayout>
+           <LinearLayout
+               android:layout_weight="1"
+               android:orientation="vertical"
+               android:layout_width="wrap_content"
+               android:layout_height="0dp">
+               <ImageView
+                   android:id="@+id/hot_share"
+                   android:layout_width="@dimen/x40"
+                   android:layout_height="@dimen/x40"
+                   android:src="@drawable/share_hot"
+                   />
+               <TextView
+                   android:id="@+id/tv_hot_shart"
+                   android:textColor="@color/hot_white"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="111"
+                   />
+           </LinearLayout>
+           <LinearLayout
+               android:layout_weight="1"
+               android:orientation="vertical"
+               android:layout_width="wrap_content"
+               android:layout_height="0dp">
+               <ImageView
+                   android:id="@+id/hot_msg"
+                   android:layout_width="@dimen/x40"
+                   android:layout_height="@dimen/x40"
+                   android:src="@drawable/hot_msg"
+                   />
+               <TextView
+                   android:id="@+id/tv_hot_msg"
+                   android:textColor="@color/hot_white"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="111"
+                   />
+           </LinearLayout>
+
+       </LinearLayout>
+   </RelativeLayout>
+
+
+</LinearLayout>

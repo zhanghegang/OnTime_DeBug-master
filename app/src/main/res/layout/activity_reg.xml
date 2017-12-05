@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+    tools:context="zhanghegang.com.bawei.onetime.RegActivity">
+<ImageView
+    android:scaleType="centerCrop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/reg1"
+    />
+<ImageView
+  android:layout_marginTop="100dp"
+    android:layout_centerHorizontal="true"
+    android:layout_width="@dimen/x150"
+    android:layout_height="@dimen/y150"
+    android:src="@drawable/reg_middle"
+    />
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/iv_back_reg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/left_jiantou" />
+    <LinearLayout
+android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+          android:layout_marginBottom="10dp"
+            android:id="@+id/ll_qq"
+            android:background="@drawable/qq_bg"
+            android:gravity="center"
+            android:layout_width="@dimen/x450"
+            android:layout_height="@dimen/y70">
+            <ImageView
+                android:src="@drawable/qq"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:text="QQ登录"
+                android:textColor="@color/reg_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_weichat"
+            android:background="@drawable/weichat_bg"
+            android:gravity="center"
+            android:layout_width="@dimen/x450"
+            android:layout_height="@dimen/y70">
+            <ImageView
+                android:src="@drawable/weichat"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:text="微信登录"
+                android:textColor="@color/reg_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_othreg"
+            android:padding="10dp"
+            android:textColor="@color/reg_white"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="其 他 登 录 方 式"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

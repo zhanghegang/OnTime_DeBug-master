@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/otherreg"
+    tools:context="zhanghegang.com.bawei.onetime.OtherRegActivity">
+    <LinearLayout
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_reg_back"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:src="@drawable/left_jiantou"
+            />
+        <TextView
+            android:id="@+id/tv_cacanle"
+            android:gravity="right"
+            android:textColor="@color/reg_white"
+            android:textSize="@dimen/add_acount"
+            android:text="已有账号"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_other_middle"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/x150"
+        android:layout_height="@dimen/x150"
+        android:src="@drawable/reg_middle"
+        />
+    <LinearLayout
+
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        android:dividerPadding="10dp"
+
+        android:background="@drawable/edit_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/iv_other_middle"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        android:divider="@drawable/edit_splite"
+        android:id="@+id/ll_edit"
+        android:layout_width="@dimen/x550"
+        android:layout_height="@dimen/y200">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y80">
+
+            <EditText
+
+                android:hint="请输入正确的手机号"
+                android:textColorHint="@color/edit_name"
+                android:layout_marginLeft="@dimen/x15"
+                android:id="@+id/et_user"
+                android:textSize="14sp"
+                android:background="@null"
+                android:layout_weight="1"
+                android:textColor="#fff"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y80">
+
+            <EditText
+                android:hint="输入大小写和数字，密码不能大于6位"
+                android:textColorHint="@color/edit_name"
+                android:layout_marginLeft="4dp"
+                android:textSize="14sp"
+                android:id="@+id/et_pass"
+                android:background="@null"
+                android:textColor="#fff"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <Button
+        android:layout_marginTop="20dp"
+        android:textColor="#fff"
+        android:text="注册"
+        android:background="@drawable/btn_other_reg_bg"
+        android:id="@+id/btn_phone_reg"
+        android:layout_below="@+id/ll_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/x550"
+        android:layout_height="40dp" />
+
+
+
+    <TextView
+
+        android:textColor="#fff"
+        android:id="@+id/tv_auto_reg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_phone_reg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="游 客 登 录" />
+</RelativeLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.design.widget.TabLayout
+    android:id="@+id/tab_tuijian"
+    app:tabMode="fixed"
+    app:tabIndicatorHeight="@dimen/x10"
+    app:tabSelectedTextColor="@color/main_head"
+app:tabIndicatorColor="@color/main_head"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y80">
+
+</android.support.design.widget.TabLayout>
+    <FrameLayout
+        android:id="@+id/fl_tuijian"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+</LinearLayout>

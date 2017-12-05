@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    app:nightBackground="@color/night_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.mingle.widget.LinearLayout
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:background="@color/main_head"
+
+        >
+        <com.makeramen.roundedimageview.RoundedImageView
+           app:riv_corner_radius="100dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/main_user_head"
+            android:src="@drawable/user_white"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            app:autoSizeMaxTextSize="15sp"
+            android:textColor="@color/main_title"
+            android:text="推荐"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:nightTextColor="@color/main_title_night"
+            android:id="@+id/tv_main_title"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:src="@drawable/writer"
+            android:id="@+id/iv_main_writer"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+    </com.mingle.widget.LinearLayout>
+</RelativeLayout>

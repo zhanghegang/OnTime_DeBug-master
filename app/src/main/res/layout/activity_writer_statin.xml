@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/publish"
+    android:fitsSystemWindows="true"
+    tools:context="bwie.com.quarter.EditorActivity">
+
+    <RelativeLayout
+        android:id="@+id/include"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100"
+        android:background="#03A9F4">
+
+        <TextView
+            android:id="@+id/tv_quxiao"
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10px"
+            android:src="@mipmap/ic_launcher_round"
+            android:text="取消"
+            android:textColor="#fff"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="创作"
+            android:textColor="#fff"
+            android:textSize="@dimen/x30" />
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_shipin"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/x200"
+        android:layout_below="@+id/include"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x150"
+        android:background="@drawable/image_bag"
+        android:padding="@dimen/x40"
+        android:src="@drawable/shipin" />
+
+    <ImageView
+        android:id="@+id/iv_duanzi"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/x200"
+        android:layout_alignLeft="@+id/iv_shipin"
+        android:layout_alignStart="@+id/iv_shipin"
+        android:layout_below="@+id/iv_shipin"
+        android:layout_marginTop="@dimen/x150"
+        android:background="@drawable/image_bag"
+        android:padding="@dimen/x40"
+        android:src="@drawable/duanzi" />
+
+
+</RelativeLayout>
