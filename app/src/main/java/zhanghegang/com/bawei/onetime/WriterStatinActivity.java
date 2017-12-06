@@ -56,6 +56,7 @@ public class WriterStatinActivity extends BaseActivity {
             case R.id.include:
                 break;
             case R.id.iv_shipin:
+start(PublishVideoActivity.class,false);
                 break;
             case R.id.iv_duanzi:
 start(StatinContentActivity.class,true);

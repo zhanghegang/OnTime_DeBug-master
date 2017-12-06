@@ -75,7 +75,11 @@ public abstract T initPresenter();
         }
     }
     public void showToast(String msg){
-        Toast.makeText(getActivity(), msg+"", Toast.LENGTH_SHORT).show();
+        if(getActivity()!=null)
+        {
+            Toast.makeText(getActivity(), msg+"", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public abstract int getViewId();

@@ -77,7 +77,14 @@ public class OtherRegActivity extends BaseActivity<LoginPresenter> implements Lo
                 start(ForgetPassActivity.class,false);
                 break;
             case R.id.tv_auto_reg:
-                start(MainActivity.class,false);
+                boolean publish = getIntent().getBooleanExtra("publish", false);
+                if(publish)
+                {
+                    finish();
+                }
+                else {
+                    start(MainActivity.class, false);
+                }
                 break;
             case R.id.tv_back:
                 finish();

@@ -32,7 +32,9 @@ public abstract class NetInterceptor implements Interceptor {
        //添加到头部
         if(headMap!=null&&!headMap.isEmpty())
         {
+            //遍历添加头部的数据
             for (Map.Entry<String, String> entry : headMap.entrySet()) {
+
                 newHeaderBuilder.add(entry.getKey(),entry.getValue());
             }
             builder.headers(newHeaderBuilder.build());

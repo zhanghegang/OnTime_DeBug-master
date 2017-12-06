@@ -51,7 +51,9 @@ public interface UrlData {
 @POST("quarter/getVideos")
 @FormUrlEncoded
     Observable<VideosBean> getHot_look(@FieldMap Map<String,String> map);
-
+@POST("quarter/publishVideo")
+@Multipart
+    Observable<ResponseBody> getPublicshVideo(@Part List<MultipartBody.Part> parts);
 
 
 }

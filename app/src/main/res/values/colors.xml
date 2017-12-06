@@ -23,4 +23,6 @@
     <color name="duanzi_time">#000000</color>
     <color name="hot_title">#000000</color>
     <color name="hot_white">#ffffff</color>
+    <color name="publish_share">#8DA1F0</color>
+    <color name="publish_edit">#A2DEFA</color>
 </resources>

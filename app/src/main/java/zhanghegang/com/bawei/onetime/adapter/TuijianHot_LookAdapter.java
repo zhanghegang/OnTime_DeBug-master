@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 
 import com.dou361.ijkplayer.widget.IjkVideoView;
+import com.dou361.ijkplayer.widget.PlayerView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -88,8 +89,10 @@ public class TuijianHot_LookAdapter extends RecyclerView.Adapter<TuijianHot_Look
 
 //        View rootview = LayoutInflater.from(context).inflate(R.layout.simple_player_view_player,holder.rlHotVideo);
         String url = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
+//        PlayerView playerView=new PlayerView(context,rootview);
+        String videoUrl = dataBean.getVideoUrl();
         holder.llHotMenu.setVisibility(View.VISIBLE);
-        holder.ijk.setVideoPath(url);
+        holder.ijk.setVideoPath(videoUrl+"");
         holder.ivTrumb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
