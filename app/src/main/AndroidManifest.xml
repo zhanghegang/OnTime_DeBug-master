@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="zhanghegang.com.bawei.onetime">
 
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -212,7 +213,9 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".PublishVideoActivity" />
         <activity android:name=".PublishServerActivity" />
-        <activity android:name=".PublishSucActivity"></activity>
+        <activity android:name=".PublishSucActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".UserInterfaceActivity"></activity>
     </application>
 
 </manifest>

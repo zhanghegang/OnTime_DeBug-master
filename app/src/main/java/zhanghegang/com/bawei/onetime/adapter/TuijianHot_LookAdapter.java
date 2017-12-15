@@ -5,6 +5,8 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.app.Activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -19,8 +21,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 
-import com.dou361.ijkplayer.widget.IjkVideoView;
-import com.dou361.ijkplayer.widget.PlayerView;
+import com.bumptech.glide.Glide;
+
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -29,8 +31,11 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import tv.danmaku.ijk.media.player.IMediaPlayer;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
+
 import zhanghegang.com.bawei.onetime.R;
+import zhanghegang.com.bawei.onetime.UserInterfaceActivity;
 import zhanghegang.com.bawei.onetime.bean.VideosBean;
 
 /**
@@ -43,13 +48,14 @@ import zhanghegang.com.bawei.onetime.bean.VideosBean;
 public class TuijianHot_LookAdapter extends RecyclerView.Adapter<TuijianHot_LookAdapter.MyViewHolder> {
 
 
-    public Activity context;
+    public Context context;
     public List<VideosBean.DataBean> list;
     public Map<Integer, Boolean> map;
 
 
     private View view;
     boolean flag = true;
+    private UidOnClick onUidClick;
 
 
     public TuijianHot_LookAdapter(Activity context, List<VideosBean.DataBean> list, Map<Integer, Boolean> map) {
@@ -66,12 +72,31 @@ public class TuijianHot_LookAdapter extends RecyclerView.Adapter<TuijianHot_Look
 
         return myViewHolder;
     }
+public interface UidOnClick{
+        void onUidClik(String uid);
+}
+public void setUidOnClik(UidOnClick uidOnClik){
+        this.onUidClick=uidOnClik;
 
-
+}
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        VideosBean.DataBean dataBean = list.get(position);
+
+        final VideosBean.DataBean dataBean = list.get(position);
+if(dataBean!=null)
+{
+
+
+
+
+        holder.ivHotUserhead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onUidClick.onUidClik(dataBean.getUid()+"");
+//                context.startActivity(new Intent(context, UserInterfaceActivity.class));
+            }
+        });
         final String cover = dataBean.getCover();
 
         String createTime = dataBean.getCreateTime();
@@ -79,75 +104,39 @@ public class TuijianHot_LookAdapter extends RecyclerView.Adapter<TuijianHot_Look
         String icon = dataBean.getUser().getIcon();
         if (!TextUtils.isEmpty(icon)) {
             holder.ivHotUserhead.setImageURI(Uri.parse(icon));
-//            Glide.with(context).load(icon).into(holder.ivHotUserhead);
+
         }
         holder.tvDuanziTime.setText(createTime + "");
         holder.tvDuanziName.setText(nickname);
+        String workDesc = dataBean.getWorkDesc();
+        if(!TextUtils.isEmpty(workDesc))
+        {
+            holder.tvHotTitle.setText(workDesc);
+        }
 
-//        View rootview = View.inflate(context, R.layout.simple_player_view_player, holder.rl_hot);
-
-
-//        View rootview = LayoutInflater.from(context).inflate(R.layout.simple_player_view_player,holder.rlHotVideo);
-        String url = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
-//        PlayerView playerView=new PlayerView(context,rootview);
+//        String url = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
         String videoUrl = dataBean.getVideoUrl();
-        holder.llHotMenu.setVisibility(View.VISIBLE);
-        holder.ijk.setVideoPath(videoUrl+"");
-        holder.ivTrumb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.llHotMenu.setVisibility(View.GONE);
-                holder.appVideoReplay.setVisibility(View.VISIBLE);
-                holder.ivTrumb.setVisibility(View.GONE);
+        System.out.println(videoUrl+"==========videourl======cover==="+cover);
 
-            }
-        });
-        holder.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                holder.ijk.seekTo(progress);
-            }
+        if(!TextUtils.isEmpty(videoUrl))
+        {
+            String[] split = videoUrl.split("cn");
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-        holder.ijk.setOnCompletionListener(new IMediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(IMediaPlayer iMediaPlayer) {
-                long currentPosition = iMediaPlayer.getCurrentPosition();
-
-                holder.seekBar.setProgress((int) currentPosition);
-            }
-        });
-        holder.appVideoReplayIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               if(holder.ijk.isPlaying())
+            videoUrl="http://120.27.23.105/"+split[1];
+            boolean b = holder.jc.setUp(videoUrl, JCVideoPlayer.SCREEN_LAYOUT_LIST, "");
+            if(b)
+            {
+                holder.jc.thumbImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+               if(!TextUtils.isEmpty(cover))
                {
-                   holder.ijk.stopPlayback();
+                   Glide.with(context).load(cover).into(holder.jc.thumbImageView);
                }
-               else {
-                   holder.ijk.start();
-               }
-                for (int i = 0; i < list.size(); i++) {
-                    holder.ijk.stopPlayback();
-                }
-
-                holder.appVideoReplayIcon.setVisibility(View.GONE);
 
             }
-        });
-//LinearLayout linearLayout=rootview.findViewById(R.id.simple_player_select_stream_container);
+        }
 
-//holder.ijk.start();
-//
+}
+
 
 
         if (map.get(position)) {
@@ -323,16 +312,16 @@ public class TuijianHot_LookAdapter extends RecyclerView.Adapter<TuijianHot_Look
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.iv_trumb)
-        ImageView ivTrumb;
-        @BindView(R.id.app_video_replay_icon)
-        ImageView appVideoReplayIcon;
-        @BindView(R.id.app_video_replay)
-        LinearLayout appVideoReplay;
-        @BindView(R.id.seekBar)
-        SeekBar seekBar;
-        @BindView(R.id.ijk_hot)
-        IjkVideoView ijk;
+//        @BindView(R.id.iv_trumb)
+//        ImageView ivTrumb;
+//        @BindView(R.id.app_video_replay_icon)
+//        ImageView appVideoReplayIcon;
+//        @BindView(R.id.app_video_replay)
+//        LinearLayout appVideoReplay;
+//        @BindView(R.id.seekBar)
+//        SeekBar seekBar;
+//        @BindView(R.id.ijk_hot)
+//        IjkVideoView ijk;
 
         @BindView(R.id.ll_hot_menu)
         LinearLayout llHotMenu;
@@ -384,6 +373,8 @@ public class TuijianHot_LookAdapter extends RecyclerView.Adapter<TuijianHot_Look
         TextView tvHotMsg;
         @BindView(R.id.hot_before)
         RelativeLayout hotBefore;
+        @BindView(R.id.jc_video)
+        JCVideoPlayerStandard jc;
         private final RelativeLayout rl_hot;
 
 

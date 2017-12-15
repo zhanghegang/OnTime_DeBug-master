@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="mainBackground">#ffffff</item>
         <item name="textColor">#fff</item>
-
+<item name="android:listDivider">@drawable/edit_splite</item>
         <item name="android:windowAnimationStyle" >@style/ManiActivityAnim</item>
 
     </style>

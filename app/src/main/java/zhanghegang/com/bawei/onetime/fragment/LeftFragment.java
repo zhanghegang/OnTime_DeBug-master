@@ -20,9 +20,12 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import zhanghegang.com.bawei.onetime.R;
 import zhanghegang.com.bawei.onetime.RegActivity;
+import zhanghegang.com.bawei.onetime.SettingActivity;
 import zhanghegang.com.bawei.onetime.base.BaseFragment;
 import zhanghegang.com.bawei.onetime.bean.UserInfo;
 import zhanghegang.com.bawei.onetime.presenter.GetUserInfoPresenter;
+import zhanghegang.com.bawei.onetime.utils.SharePrefrenceBack;
+import zhanghegang.com.bawei.onetime.utils.SharePrefrenceUtils;
 import zhanghegang.com.bawei.onetime.view.GetUserInfoView;
 
 /**
@@ -153,6 +156,8 @@ sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             case R.id.ll_worker:
                 break;
             case R.id.ll_setting:
+
+                start(SettingActivity.class,false);
                 break;
         }
     }

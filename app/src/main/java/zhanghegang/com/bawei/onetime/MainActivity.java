@@ -1,10 +1,7 @@
 package zhanghegang.com.bawei.onetime;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -13,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kson.slidingmenu.SlidingMenu;
-import com.tencent.bugly.crashreport.biz.UserInfoBean;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -65,6 +62,9 @@ public class MainActivity extends BaseActivity<GetUserInfoPresenter> implements 
 
     private SlidingMenu slidingMenu;
     private GetUserInfoPresenter getUserInfoPresenter;
+    private TuijianFragment tuijianFragment;
+    private DuanziFragment duanziFragment;
+    private VedioFragment vedioFragment;
 
 
     @Override
@@ -87,22 +87,18 @@ public class MainActivity extends BaseActivity<GetUserInfoPresenter> implements 
         setStatus(getResources().getColor(R.color.main_head));
 
         updateTitle.setOnClickImage(this);
-        TuijianFragment tuijianFragment = new TuijianFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_main, tuijianFragment).commit();
+        tuijianFragment = new TuijianFragment();
+        duanziFragment = new DuanziFragment();
+        vedioFragment = new VedioFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_main,tuijianFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_main,duanziFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_main,vedioFragment).commit();
+
+        getSupportFragmentManager().beginTransaction().hide(duanziFragment).commit();
+        getSupportFragmentManager().beginTransaction().hide(vedioFragment).commit();
         setBottom(1);
         setLeft();
-//        SkinCompat.setSkinStyle(this, SkinStyle.Light, new SkinCompat.SkinStyleChangeListener() {
-//            @Override
-//            public void beforeChange() {
-//                System.out.println("======beforeChange=====night=========");
-//            }
-//
-//            @Override
-//            public void afterChange() {
-//                System.out.println("=====afterChange======night=========");
-//
-//            }
-//        });
+
 
     }
     boolean flag=false;
@@ -130,6 +126,7 @@ public class MainActivity extends BaseActivity<GetUserInfoPresenter> implements 
             }
             else {
                 finish();
+                System.exit(0);
             }
 
 
@@ -174,26 +171,32 @@ presenter.getUserInfo();
         switch (view.getId()) {
             case R.id.ll_tuijian:
 
-                TuijianFragment tuijianFragment = new TuijianFragment();
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_main, tuijianFragment).commit();
+
+                getSupportFragmentManager().beginTransaction().show(tuijianFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(duanziFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(vedioFragment).commit();
                 setBottom(1);
 
                 break;
             case R.id.ll_duanzi:
 
-                DuanziFragment duanziFragment = new DuanziFragment();
 
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_main, duanziFragment).commit();
+
+                getSupportFragmentManager().beginTransaction().hide(tuijianFragment).commit();
+                getSupportFragmentManager().beginTransaction().show(duanziFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(vedioFragment).commit();
                 setBottom(2);
                 break;
             case R.id.ll_video:
 
-                MyApp.updateNightMode(true);
-                VedioFragment vedioFragment = new VedioFragment();
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_main, vedioFragment).commit();
+
+
+                getSupportFragmentManager().beginTransaction().hide(tuijianFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(duanziFragment).commit();
+                getSupportFragmentManager().beginTransaction().show(vedioFragment).commit();
                 setBottom(3);
                 break;
         }
@@ -239,13 +242,7 @@ presenter.getUserInfo();
         }
         }
 
-/*if(dlPager.isDrawerOpen(flLeft))
-{
-    dlPager.closeDrawer(flLeft);
-}
-else {
-    dlPager.openDrawer(flLeft);
-}*/
+
     }
 
     @Override

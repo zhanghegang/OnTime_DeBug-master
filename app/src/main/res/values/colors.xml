@@ -9,6 +9,7 @@
     <color name="weichat">#339933</color>
     <color name="edit_bg">#80987654</color>
     <color name="edit_middle">#eee</color>
+    <color name="setting_middle">#444</color>
     <color name="edit_name">#ddd</color>
     <color name="btn_other_reg_bg">#ffcc66</color>
     <color name="main_head">#0099ff</color>
@@ -25,4 +26,8 @@
     <color name="hot_white">#ffffff</color>
     <color name="publish_share">#8DA1F0</color>
     <color name="publish_edit">#A2DEFA</color>
+    <color name="setting_exit_login">#FC7265</color>
+    <color name="user_head_name">#ffffff</color>
+    <color name="user_praise_normal">#bbbbbb</color>
+    <color name="user_praise_select">#339933</color>
 </resources>

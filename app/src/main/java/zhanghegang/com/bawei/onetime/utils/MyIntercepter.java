@@ -37,6 +37,7 @@ private int versionCode;
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
+        Request.Builder request_builder = request.newBuilder();
         System.out.println(request.method() + "开始添加公共参数222222222");
         String token = (String) SharePrefrenceUtils.getData(SharePrefrenceBack.String, "token");
         try {
@@ -44,8 +45,20 @@ private int versionCode;
             PackageManager pm = context.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
             versionCode = pi.versionCode;
+            System.out.println("versionCode============"+versionCode);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
+        }
+        if("GET".equals(request.method()))
+        {
+
+            HttpUrl.Builder builder = request.url().newBuilder();
+            HttpUrl build = builder.addQueryParameter("source", "android")
+                    .addQueryParameter("appVersion", versionCode + "")
+                    .addQueryParameter("token", token + "")
+                    .build();
+           request = request_builder.url(build).build();
+
         }
 
 
@@ -66,7 +79,7 @@ private int versionCode;
                         .add("token", token+"")
                         .build();
                 System.out.println("开始添加公共参数55555" );
-                request = request.newBuilder().post(body).build();
+                request = request_builder.post(body).build();
 
             }
             else if(request.body() instanceof MultipartBody)
@@ -81,7 +94,7 @@ private int versionCode;
                 for (MultipartBody.Part part : parts) {
                     builder.addPart(part);
                 }
-                request=request.newBuilder().post(builder.build()).build();
+                request=request_builder.post(builder.build()).build();
             }
         }
 

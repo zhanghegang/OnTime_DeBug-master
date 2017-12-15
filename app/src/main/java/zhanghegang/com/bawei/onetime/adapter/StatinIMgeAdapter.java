@@ -3,6 +3,7 @@ package zhanghegang.com.bawei.onetime.adapter;
 import android.content.Context;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,11 @@ public class StatinIMgeAdapter extends RecyclerView.Adapter<StatinIMgeAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String img = imgs[position];
-        System.out.println("img=========="+img);
+//        System.out.println("img=========="+img);
+        if (TextUtils.isEmpty(img))
+        {
+            holder.iv_statin_img.setVisibility(View.GONE);
+        }
         Glide.with(context).load(img).into(holder.iv_statin_img);
     }
 

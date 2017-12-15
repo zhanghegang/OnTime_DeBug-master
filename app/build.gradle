@@ -7,8 +7,8 @@ android {
         applicationId "com.onetime.platform"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 300
+        versionName "3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 GETUI_APP_ID    : "rQ3Iz7Sp5J9ftXcgRJfL8",
@@ -36,7 +36,6 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.suppo,rt.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     //butterKnife配置
@@ -70,12 +69,8 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     //fresco图片框架
     compile 'com.makeramen:roundedimageview:2.3.0'
-    //圆形图片
-    compile 'com.github.zzz40500:ThemeDemo:0.1'
-    //日夜切换
-    compile 'com.github.zzz40500:CommonAdapter:1.0'
     implementation project(':slidingmenu')
-    implementation 'com.android.support:design:27.0.1'
+    implementation 'com.android.support:design:26.1.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.facebook.fresco:fresco:1.5.0'
     //xRecyclerView
@@ -86,17 +81,15 @@ dependencies {
     compile name: 'SMSSDK-3.0.0', ext: 'aar'
     compile name: 'SMSSDKGUI-3.0.0', ext: 'aar'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-    compile 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
-    //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
-//    compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
-//对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.0'
-//    compile 'com.dou361.ijkplayer-armv5:jjdxm-ijkplayer-armv5:1.0.0'
-////对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.6.0'
-//    compile 'com.dou361.ijkplayer-arm64:jjdxm-ijkplayer-arm64:1.0.0'
-////对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.0'
-//    compile 'com.dou361.ijkplayer-x86:jjdxm-ijkplayer-x86:1.0.0'
-////对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.6.0'
-//    compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
+
     compile 'cjt.library.wheel:camera:1.1.9'
+    compile 'fm.jiecao:jiecaovideoplayer:4.8.3'
+    //dagger2依赖
+    compile 'com.google.dagger:dagger:2.4'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.4'
+    //java注解
+    compile 'org.glassfish:javax.annotation:10.0-b28'
+    //eventBus
+    compile 'org.greenrobot:eventbus:3.0.0'
 
 }

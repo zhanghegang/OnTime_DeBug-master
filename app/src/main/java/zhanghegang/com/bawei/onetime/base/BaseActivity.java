@@ -67,6 +67,7 @@ public void setNight(boolean isNight){
     recreate();
 
 }
+
 public void setStatus(int color){
 
     //先设置状态栏显示

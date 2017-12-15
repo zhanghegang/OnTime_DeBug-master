@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="@dimen/x80"
+
+    >
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="@dimen/x80"
+        android:background="@color/main_head"
+        android:id="@+id/rl_setting_head"
+        android:gravity="center_vertical"
+       android:padding="@dimen/x10"
+        >
+<ImageView android:id="@+id/setting_back" android:layout_centerVertical="true" android:layout_width="@dimen/x50" android:src="@drawable/left_jiantou" android:layout_height="@dimen/x50"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="17sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="设置"
+        />
+
+    </RelativeLayout>
+
+</merge>

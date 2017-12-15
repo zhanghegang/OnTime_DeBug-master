@@ -5,8 +5,8 @@
     android:layout_height="match_parent">
 <ImageView
     android:id="@+id/iv_statin_img"
-    android:layout_width="@dimen/x250"
-    android:layout_height="@dimen/x250"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x300"
     android:scaleType="centerCrop"
     android:src="@mipmap/ic_launcher_round"
     />

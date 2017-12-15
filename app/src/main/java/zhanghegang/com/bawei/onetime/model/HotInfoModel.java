@@ -26,7 +26,7 @@ import zhanghegang.com.bawei.onetime.utils.UrlData;
 
 public class HotInfoModel {
 
-    public void getUserInfo( final HotInfoCallBack hotInfoCallBack) {
+    public void getUserInfo(  final HotInfoCallBack hotInfoCallBack) {
 
         UrlData urlData = new RetrofitUtils.Builder().addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

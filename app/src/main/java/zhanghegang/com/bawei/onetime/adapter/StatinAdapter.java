@@ -61,105 +61,97 @@ public Map<Integer,Boolean> map;
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
 
-        StatinBean.DataBean statinBean = list.get(position);
-        String imgUrls = (String) statinBean.getImgUrls();
+    StatinBean.DataBean statinBean = list.get(position);
+    String imgUrls = (String) statinBean.getImgUrls();
+    String createTime = statinBean.getCreateTime();
 
-            if(!TextUtils.isEmpty(imgUrls))
-            {
-                String[] split = imgUrls.split("\\|");
-                if(split.length<3)
-                {
-                    holder.rcv_statin_img.setLayoutManager(new GridLayoutManager(context,split.length));
-
-                }
-                else {
-                    holder.rcv_statin_img.setLayoutManager(new GridLayoutManager(context,3));
-                }
-                StatinIMgeAdapter statinIMgeAdapter=new StatinIMgeAdapter(context,split);
-                holder.rcv_statin_img.setAdapter(statinIMgeAdapter);
-        }
-
-        String createTime = statinBean.getCreateTime();
-
-        String content = statinBean.getContent();
-        StatinBean.DataBean.UserBean user = statinBean.getUser();
-        String icon = user.getIcon();
-        String nickname = user.getNickname();
-        if(!TextUtils.isEmpty(icon)) {
-            System.out.println("icon============"+icon);
-            holder.ivDuanziUserhead.setImageURI(Uri.parse(icon));
-        }
-      holder.tvDuanziName.setText(nickname);
-       holder.tvDuanziTime.setText(createTime);
-        holder.tvDuanziContent.setText(content);
-
-        final Object commentNum = list.get(position).getCommentNum();
-        final Object praiseNum = list.get(position).getPraiseNum();
-        final Object shareNum = list.get(position).getShareNum();
-
-        if(commentNum!=null)
-        {
-            holder.tvMsg.setText(commentNum+"");
-        }
-        if(shareNum!=null)
-        {
-            holder.tvDuanziShare.setText(shareNum+"");
-        }
-        if(praiseNum!=null)
-        {
-            holder.tvDuanziGuanzhu.setText(praiseNum+"");
-        }
-
-        if(commentNum==null&&praiseNum==null&&shareNum==null) {
-            holder.tvMsg.setText(0+"");
-            holder.tvDuanziShare.setText(0+"");
-            holder.tvDuanziGuanzhu.setText(0+"");
-        }
-        if(map.get(position))
-        {
-            holder.ivDuanziJia.setImageResource(R.drawable.item_jian);
-           holder.llDuanziGuanzhu.setVisibility(View.VISIBLE);
-            holder.llDuanziMsg.setVisibility(View.VISIBLE);
-            holder.llDuanziShare.setVisibility(View.VISIBLE);
-            Animator animator= AnimatorInflater.loadAnimator(context,R.animator.statin_anim_ll_translatex);
-            Animator animator2= AnimatorInflater.loadAnimator(context,R.animator.statin_anim_ll_translatex2);
-            Animator animator3= AnimatorInflater.loadAnimator(context,R.animator.statin_anim_ll_translatex3);
-            animator.setTarget(holder.llDuanziGuanzhu);
-            animator2.setTarget(holder.llDuanziShare);
-            animator3.setTarget(holder.llDuanziMsg);
-            AnimatorSet animatorSet=new AnimatorSet();
-            animatorSet.play(animator).with(animator2).with(animator3);
-            animatorSet.start();
-
-        }
-        else {
-            map.put(position,false);
-            holder.ivDuanziJia.setImageResource(R.drawable.item_jia);
-            holder.llDuanziGuanzhu.setVisibility(View.GONE);
-            holder.llDuanziMsg.setVisibility(View.GONE);
-            holder.llDuanziShare.setVisibility(View.GONE);
-        }
-        holder.llDuanziJia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println(position+"position=========="+map.get(position));
-
-
-                        if(map.get(position)==false)
-                        {
-                            setAnim(holder,holder.getLayoutPosition());
-                            map.put(position,true);
-                        }
-                        else {
-
-                            setAnimin(holder,holder.getLayoutPosition());
-                            map.put(position,false);
-                        }
-            }
-        });
-
-
+    String content = statinBean.getContent();
+    StatinBean.DataBean.UserBean user = statinBean.getUser();
+    String icon = user.getIcon();
+    String nickname = user.getNickname();
+    if (!TextUtils.isEmpty(icon)) {
+        System.out.println("icon============" + icon);
+        holder.ivDuanziUserhead.setImageURI(Uri.parse(icon));
     }
+    holder.tvDuanziName.setText(nickname);
+    holder.tvDuanziTime.setText(createTime);
+    holder.tvDuanziContent.setText(content);
+    if (!TextUtils.isEmpty(imgUrls)) {
+        String[] split = imgUrls.split("\\|");
+        if (split.length < 3) {
+            holder.rcv_statin_img.setLayoutManager(new GridLayoutManager(context, split.length));
+
+        } else {
+            holder.rcv_statin_img.setLayoutManager(new GridLayoutManager(context, 3));
+        }
+        StatinIMgeAdapter statinIMgeAdapter = new StatinIMgeAdapter(context, split);
+        holder.rcv_statin_img.setAdapter(statinIMgeAdapter);
+    } else {
+        holder.rcv_statin_img.setVisibility(View.GONE);
+    }
+
+
+    final Object commentNum = list.get(position).getCommentNum();
+    final Object praiseNum = list.get(position).getPraiseNum();
+    final Object shareNum = list.get(position).getShareNum();
+
+    if (commentNum != null) {
+        holder.tvMsg.setText(commentNum + "");
+    }
+    if (shareNum != null) {
+        holder.tvDuanziShare.setText(shareNum + "");
+    }
+    if (praiseNum != null) {
+        holder.tvDuanziGuanzhu.setText(praiseNum + "");
+    }
+
+    if (commentNum == null && praiseNum == null && shareNum == null) {
+        holder.tvMsg.setText(0 + "");
+        holder.tvDuanziShare.setText(0 + "");
+        holder.tvDuanziGuanzhu.setText(0 + "");
+    }
+    if (map.get(position)) {
+        holder.ivDuanziJia.setImageResource(R.drawable.item_jian);
+        holder.llDuanziGuanzhu.setVisibility(View.VISIBLE);
+        holder.llDuanziMsg.setVisibility(View.VISIBLE);
+        holder.llDuanziShare.setVisibility(View.VISIBLE);
+        Animator animator = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_ll_translatex);
+        Animator animator2 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_ll_translatex2);
+        Animator animator3 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_ll_translatex3);
+        animator.setTarget(holder.llDuanziGuanzhu);
+        animator2.setTarget(holder.llDuanziShare);
+        animator3.setTarget(holder.llDuanziMsg);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(animator).with(animator2).with(animator3);
+        animatorSet.start();
+
+    } else {
+        map.put(position, false);
+        holder.ivDuanziJia.setImageResource(R.drawable.item_jia);
+        holder.llDuanziGuanzhu.setVisibility(View.GONE);
+        holder.llDuanziMsg.setVisibility(View.GONE);
+        holder.llDuanziShare.setVisibility(View.GONE);
+    }
+    holder.llDuanziJia.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            System.out.println(position + "position==========" + map.get(position));
+
+
+            if (map.get(position) == false) {
+                setAnim(holder, holder.getLayoutPosition());
+                map.put(position, true);
+            } else {
+
+                setAnimin(holder, holder.getLayoutPosition());
+                map.put(position, false);
+            }
+        }
+    });
+}
+
+
+
 
     @Override
     public int getItemCount() {

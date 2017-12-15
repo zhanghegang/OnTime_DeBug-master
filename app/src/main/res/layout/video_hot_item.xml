@@ -158,7 +158,13 @@
        android:layout_width="match_parent"
        android:layout_height="@dimen/y330"
        >
-       <include layout="@layout/hot_vedio"></include>
+       <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+           android:layout_width="match_parent"
+           android:id="@+id/jc_video"
+           android:layout_height="@dimen/y330">
+
+       </fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard>
+       <!--<include layout="@layout/hot_vedio"></include>-->
 
        <LinearLayout
            android:padding="@dimen/x5"

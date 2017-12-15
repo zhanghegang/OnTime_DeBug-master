@@ -47,7 +47,7 @@ public class GetUserInfoModel{
                 .build().getUrlData();
         urlData.getUserInfo(uid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-        .subscribe(new Observer<ResponseBody>() {
+        .subscribeWith(new Observer<ResponseBody>() {
             @Override
             public void onSubscribe(Disposable d) {
 

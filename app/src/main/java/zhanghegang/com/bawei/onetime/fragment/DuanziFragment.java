@@ -21,6 +21,7 @@ import zhanghegang.com.bawei.onetime.adapter.StatinAdapter;
 import zhanghegang.com.bawei.onetime.base.BaseFragment;
 import zhanghegang.com.bawei.onetime.bean.StatinBean;
 import zhanghegang.com.bawei.onetime.presenter.StatinPresenter;
+import zhanghegang.com.bawei.onetime.utils.MyItemDecoration;
 import zhanghegang.com.bawei.onetime.view.SatinView;
 
 /**
@@ -56,6 +57,7 @@ private int startIndex=0;
     public void initFragment() {
         map = new HashMap<>();
         dataList=new ArrayList<>();
+        rcvDuanzi.addItemDecoration(new MyItemDecoration(getActivity()));
 rcvDuanzi.setLoadingListener(this);
 rcvDuanzi.setLoadingMoreEnabled(true);
 rcvDuanzi.setPullRefreshEnabled(true);
@@ -88,16 +90,21 @@ showToast(msg);
         String code = ((StatinBean) data).getCode();
         String msg = ((StatinBean) data).getMsg();
 //        System.out.println(dataList.size()+"size==========="+code+((StatinBean) data).getData().get(0).getContent());
-        dataList .addAll(((StatinBean) data).getData());
+        List<StatinBean.DataBean> list_statin = ((StatinBean) data).getData();
+        if(list_statin==null)
+        {
+            return;
+        }
+        this.dataList.addAll(((StatinBean) data).getData());
 
-        for (int i = startIndex; i < dataList.size()+startIndex; i++) {
+        for (int i = startIndex; i < this.dataList.size()+startIndex; i++) {
             map.put(i,false);
         }
-        startIndex+=dataList.size()-1;
-        System.out.println("startIndex========"+startIndex+"datalist==========:"+dataList.size());
+        startIndex+= this.dataList.size()-1;
+//        System.out.println("startIndex========"+startIndex+"datalist==========:"+dataList.size());
         if(statinAdapter==null) {
-            statinAdapter = new StatinAdapter(getContext(), dataList,map);
-            rcvDuanzi.setLayoutManager(new LinearLayoutManager(getContext()));
+            statinAdapter = new StatinAdapter(getContext(), this.dataList,map);
+            rcvDuanzi.setLayoutManager(new LinearLayoutManager(getActivity()));
             rcvDuanzi.setAdapter(statinAdapter);
         }
         else {

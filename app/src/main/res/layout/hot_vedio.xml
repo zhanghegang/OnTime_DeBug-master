@@ -3,44 +3,4 @@
     android:id="@+id/rl_auto_vedio"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="@dimen/y300">
-    <com.dou361.ijkplayer.widget.IjkVideoView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y300"
-        android:id="@+id/ijk_hot"
-        ></com.dou361.ijkplayer.widget.IjkVideoView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <ImageView
-        android:src="@drawable/start5"
-        android:id="@+id/iv_trumb"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:visibility="visible"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/app_video_replay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#33000000"
-        android:gravity="center"
-        android:visibility="gone"
-        android:orientation="vertical"
-        >
-        <!-- 播放状态-->
-        <ImageView
-            android:id="@+id/app_video_replay_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/simple_player_circle_outline_white_36dp"/>
-    </LinearLayout>
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x30" />
 </RelativeLayout>
