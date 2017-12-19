@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -86,11 +87,13 @@ public void setUidOnClik(UidOnClick uidOnClik){
         final VideosBean.DataBean dataBean = list.get(position);
 if(dataBean!=null)
 {
+    List<VideosBean.DataBean.CommentsBean> comments = dataBean.getComments();
+    Comment_Adapter comment_adapter=new Comment_Adapter(context,comments);
+    holder.rcv_video_comment_list.setLayoutManager(new LinearLayoutManager(context));
+    holder.rcv_video_comment_list.setAdapter(comment_adapter);
 
 
-
-
-        holder.ivHotUserhead.setOnClickListener(new View.OnClickListener() {
+    holder.ivHotUserhead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onUidClick.onUidClik(dataBean.getUid()+"");
@@ -100,7 +103,7 @@ if(dataBean!=null)
         final String cover = dataBean.getCover();
 
         String createTime = dataBean.getCreateTime();
-        String nickname = dataBean.getUser().getNickname();
+      String nickname = dataBean.getUser().getNickname();
         String icon = dataBean.getUser().getIcon();
         if (!TextUtils.isEmpty(icon)) {
             holder.ivHotUserhead.setImageURI(Uri.parse(icon));
@@ -375,6 +378,8 @@ if(dataBean!=null)
         RelativeLayout hotBefore;
         @BindView(R.id.jc_video)
         JCVideoPlayerStandard jc;
+        @BindView(R.id.rcv_video_comment_list)
+        RecyclerView rcv_video_comment_list;
         private final RelativeLayout rl_hot;
 
 

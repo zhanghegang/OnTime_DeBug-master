@@ -1,7 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'org.greenrobot.greendao'
 android {
-
+    signingConfigs {
+        debug {
+            keyAlias 'onetime'
+            keyPassword 'onetime1507c'
+            storeFile file('D:/a/only/一刻钟签名/onetime.jks')
+            storePassword 'onetime1507c'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.onetime.platform"
@@ -17,6 +25,10 @@ android {
         ]
 
 
+    }
+    greendao {
+        schemaVersion 1
+        targetGenDir 'src/main/java'
     }
     buildTypes {
         release {
@@ -38,58 +50,80 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
     //butterKnife配置
     compile 'com.jakewharton:butterknife:8.7.0'
     compile 'com.tencent.bugly:crashreport:latest.release'
+
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
+
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
     compile 'com.umeng.analytics:analytics:latest.integration'
+
     //友盟统计配置
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+
     //leackCanary检测内存（debug）
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+
     //leackCanary检测内存（正式版）
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+
     //leackCanary检测内存（测试版）
     compile 'com.getui:sdk:2.11.1.0'
+
     //个推依赖
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+
     //rxjava
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
     //rxjava
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
+
     //retrofit
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
     //retrofit和Gson集合
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
     //retrifit和rxjava
     implementation 'com.facebook.fresco:fresco:1.5.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
+
     //fresco图片框架
     compile 'com.makeramen:roundedimageview:2.3.0'
     implementation project(':slidingmenu')
     implementation 'com.android.support:design:26.1.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.facebook.fresco:fresco:1.5.0'
+
     //xRecyclerView
     compile 'com.jcodecraeer:xrecyclerview:1.3.2'
     implementation project(':multi-image-selector')
-    compile 'com.xhb:xbanner:1.3.0'//xbanner配置
+    compile 'com.xhb:xbanner:1.3.0'
+
+    //xbanner配置
+
     //手机号获取密码
     compile name: 'SMSSDK-3.0.0', ext: 'aar'
     compile name: 'SMSSDKGUI-3.0.0', ext: 'aar'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-
     compile 'cjt.library.wheel:camera:1.1.9'
     compile 'fm.jiecao:jiecaovideoplayer:4.8.3'
+
     //dagger2依赖
     compile 'com.google.dagger:dagger:2.4'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.4'
+
     //java注解
     compile 'org.glassfish:javax.annotation:10.0-b28'
+
     //eventBus
     compile 'org.greenrobot:eventbus:3.0.0'
 
+    //greenDao
+    compile 'org.greenrobot:greendao:3.1.0'
 }

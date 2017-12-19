@@ -215,7 +215,8 @@
         <activity android:name=".PublishServerActivity" />
         <activity android:name=".PublishSucActivity" />
         <activity android:name=".SettingActivity" />
-        <activity android:name=".UserInterfaceActivity"></activity>
+        <activity android:name=".UserInterfaceActivity" />
+        <activity android:name=".VideoDetailActivity"></activity>
     </application>
 
 </manifest>

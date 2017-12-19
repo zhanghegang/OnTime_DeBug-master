@@ -11,4 +11,6 @@ import zhanghegang.com.bawei.onetime.base.BaseView;
 
 public interface UserInterfaceView extends BaseView{
     void sucData(Object data);
+    void sucAttentionData(Object data);
+    void errorAttentionInfo(String msg);
 }

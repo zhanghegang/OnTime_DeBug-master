@@ -71,5 +71,7 @@ Observable<StatinBean> getStatin(@Query("page") String page);
     @Headers("cache:20")
     @GET("quarter/getUserVideos")
     Flowable<UserInterfaceBean> getUserInterface(@QueryMap Map<String,String> map);
+    @GET("quarter/follow")
+    Flowable<ResponseBody> getFollow(@QueryMap Map<String,String> map);
 
 }

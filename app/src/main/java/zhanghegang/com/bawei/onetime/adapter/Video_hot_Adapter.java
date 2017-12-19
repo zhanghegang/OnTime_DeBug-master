@@ -1,6 +1,7 @@
 package zhanghegang.com.bawei.onetime.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import zhanghegang.com.bawei.onetime.R;
+import zhanghegang.com.bawei.onetime.VideoDetailActivity;
 import zhanghegang.com.bawei.onetime.bean.HotVideoBean;
 
 /**
@@ -30,6 +32,7 @@ import zhanghegang.com.bawei.onetime.bean.HotVideoBean;
 public class Video_hot_Adapter extends RecyclerView.Adapter<Video_hot_Adapter.MyViewHolder> {
     public Context context;
 public List<HotVideoBean.DataBean> list;
+private int radomListSize=0;
     List<Integer> heigtList=new ArrayList<>();
     public Video_hot_Adapter(Context context, List<HotVideoBean.DataBean> list) {
         this.context = context;
@@ -49,8 +52,10 @@ public List<HotVideoBean.DataBean> list;
         return new MyViewHolder(view);
     }
     public void setHeight( List<HotVideoBean.DataBean> list){
+
         if(heigtList.size()<list.size())
         {
+            radomListSize=heigtList.size();
             for (int i = heigtList.size(); i <list.size() ; i++) {
                 heigtList.add(new Random().nextInt(300)+200);
             }
@@ -61,9 +66,28 @@ public List<HotVideoBean.DataBean> list;
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
+if(radomListSize<list.size())
+{
+
+
+    if(position>radomListSize&&position<list.size())
+    {
+        System.out.println(radomListSize+"=======listSize=========="+list.size());
         ViewGroup.LayoutParams layoutParams = holder.iv.getLayoutParams();
         layoutParams.height=heigtList.get(position);
-        HotVideoBean.DataBean dataBean = list.get(position);
+    }
+
+}
+        final HotVideoBean.DataBean dataBean = list.get(position);
+        holder.iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, VideoDetailActivity.class);
+                intent.putExtra("wid",dataBean.getWid());
+                context.startActivity(intent);
+
+            }
+        });
         String cover = dataBean.getCover();
         if(TextUtils.isEmpty(cover))
         {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:padding="@dimen/x20"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ProgressBar
+    android:padding="@dimen/x20"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/pb_down"
+    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+    />
+    <LinearLayout
+android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_down_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停"
+            />
+        <Button
+            android:id="@+id/btn_down_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="继续"
+            />
+    </LinearLayout>
+</LinearLayout>

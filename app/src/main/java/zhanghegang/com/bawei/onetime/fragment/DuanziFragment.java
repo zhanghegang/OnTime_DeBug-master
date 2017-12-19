@@ -16,11 +16,13 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import zhanghegang.com.bawei.onetime.R;
 import zhanghegang.com.bawei.onetime.adapter.StatinAdapter;
 import zhanghegang.com.bawei.onetime.base.BaseFragment;
 import zhanghegang.com.bawei.onetime.bean.StatinBean;
 import zhanghegang.com.bawei.onetime.presenter.StatinPresenter;
+import zhanghegang.com.bawei.onetime.utils.DownApk;
 import zhanghegang.com.bawei.onetime.utils.MyItemDecoration;
 import zhanghegang.com.bawei.onetime.view.SatinView;
 
@@ -32,6 +34,8 @@ import zhanghegang.com.bawei.onetime.view.SatinView;
  */
 
 public class DuanziFragment extends BaseFragment<StatinPresenter> implements SatinView, XRecyclerView.LoadingListener {
+
+
 
 private int page=1;
     @BindView(R.id.rcv_duanzi)

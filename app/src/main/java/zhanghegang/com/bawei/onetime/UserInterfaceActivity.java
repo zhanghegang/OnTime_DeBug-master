@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -33,6 +34,7 @@ import zhanghegang.com.bawei.onetime.base.BaseActivity;
 import zhanghegang.com.bawei.onetime.base.BasePresenter;
 import zhanghegang.com.bawei.onetime.bean.HotVideoBean;
 import zhanghegang.com.bawei.onetime.bean.UserInterfaceBean;
+//import zhanghegang.com.bawei.onetime.component.DaggerUserInterfaceComponent;
 import zhanghegang.com.bawei.onetime.component.DaggerUserInterfaceComponent;
 import zhanghegang.com.bawei.onetime.component.UserInterfaceComponent;
 import zhanghegang.com.bawei.onetime.moudles.UserInterfaceMoudle;
@@ -42,7 +44,7 @@ import zhanghegang.com.bawei.onetime.utils.SharePrefrenceBack;
 import zhanghegang.com.bawei.onetime.utils.SharePrefrenceUtils;
 import zhanghegang.com.bawei.onetime.view.UserInterfaceView;
 
-public class UserInterfaceActivity extends BaseActivity implements UserInterfaceView, XRecyclerView.LoadingListener {
+public class UserInterfaceActivity extends BaseActivity implements UserInterfaceView, XRecyclerView.LoadingListener, View.OnClickListener {
     @Inject
     UserInterfacePresenter userInterfacePresenter;
 //    @BindView(R.id.user_back)
@@ -76,6 +78,7 @@ private int page=1;
     private String userid;
     private String pUid="";
     private View view;
+    private String uid;
 
     @Override
     public BasePresenter initPresenter() {
@@ -111,8 +114,8 @@ private int page=1;
         xrcvUserInterface.setLayoutManager(new LinearLayoutManager(this));
         userList = new ArrayList<>();
         map = new HashMap<>();
-        String uid = EventBus.getDefault().getStickyEvent(String.class);
-        System.out.println("uid=============="+uid);
+        uid = EventBus.getDefault().getStickyEvent(String.class);
+        System.out.println("uid=============="+ uid);
         if(!TextUtils.isEmpty(uid))
         {
 
@@ -138,6 +141,7 @@ private int page=1;
         tvPraiseNum=view.findViewById(R.id.tv_praise_num);
         ivUserInterfaceImg=view.findViewById(R.id.iv_user_interface_img);
         tabAttention=view.findViewById(R.id.tab_attention);
+        tvUserAttention.setOnClickListener(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN ,sticky = true)
@@ -201,22 +205,32 @@ showToast(msg);
 
     }
 
+    @Override
+    public void sucAttentionData(Object data) {
+        String code = (String) data;
+        if("0".equals(code))
+        {
+            showToast("关注成功");
+            tvUserAttention.setSelected(true);
+        }
+        else if("2".equals(code)){
+            showToast("code为2");
+//            start(OtherRegActivity.class,true);
 
-//    @OnClick({R.id.user_back, R.id.user_share, R.id.user_msg, R.id.tv_user_attention, R.id.iv_user_praise})
-//    public void onViewClicked(View view) {
-//        switch (view.getId()) {
-//            case R.id.user_back:
-//                break;
-//            case R.id.user_share:
-//                break;
-//            case R.id.user_msg:
-//                break;
-//            case R.id.tv_user_attention:
-//                break;
-//            case R.id.iv_user_praise:
-//                break;
-//        }
-//    }
+        }
+        else {
+            tvUserAttention.setSelected(true);
+            showToast("用户已关注");
+        }
+    }
+
+    @Override
+    public void errorAttentionInfo(String msg) {
+        showToast(msg);
+    }
+
+
+//
 
     @Override
     public void onRefresh() {
@@ -236,6 +250,16 @@ page++;
         if(!TextUtils.isEmpty(pUid))
         {
             userInterfacePresenter.getUserIntefaceInfo(pUid,page+"");
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.tv_user_attention:
+userInterfacePresenter.getAttentionInfo(uid);
+                break;
         }
     }
 }

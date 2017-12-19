@@ -1,6 +1,7 @@
 package zhanghegang.com.bawei.onetime;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -114,7 +115,28 @@ public class ReginPhoneActivity extends BaseActivity<RegPresenter> implements Re
 
     private void setReg() {
         String user = etUser.getText().toString().trim();
+
+
         String pass = etPass.getText().toString().trim();
-        presenter.getRegInfo("0",user,pass);
+        boolean judge = judge(user);
+        if(judge)
+        {
+            presenter.getRegInfo("0",user,pass);
+        }
+        else {
+            showToast("哥们，这不是手机号，别注册了");
+        }
+
+    }
+    private boolean judge(String phone){
+        if(!TextUtils.isEmpty(phone))
+        {
+            String number="[1][34578]\\d{9}";
+            return phone.matches(number);
+        }
+        else {
+            return false;
+        }
+
     }
 }
