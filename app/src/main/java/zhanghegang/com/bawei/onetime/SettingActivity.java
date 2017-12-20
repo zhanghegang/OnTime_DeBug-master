@@ -287,7 +287,7 @@ total+=current;
         if(contentLenth!=0)
         {
 
-            int progress = (int) (((float)(total / contentLenth))*100);
+            int progress = (int) ((((float)total /(float) contentLenth))*100);
             System.out.println((double) (total / contentLenth)+"current=====%%%%%%%%%===="+progress);
             progressBar.setProgress(progress);
             if(progress==100)

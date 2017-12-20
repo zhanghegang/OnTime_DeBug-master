@@ -96,7 +96,7 @@
 
             </LinearLayout>
             <TextView
-android:background="@drawable/attention_bg"
+android:background="@drawable/attention_selector_bg"
                 android:id="@+id/tv_user_attention"
                 android:gravity="center"
                 android:text="+关注"

@@ -64,15 +64,10 @@ mView.hidLoading();
     }
 
     public void getAttentionInfo(String followid){
-        System.out.println("follwid====="+followid);
+
         String uid= (String) SharePrefrenceUtils.getData(SharePrefrenceBack.String, "uid");
-        String token = (String) SharePrefrenceUtils.getData(SharePrefrenceBack.String, "token");
-        if(TextUtils.isEmpty(token))
-        {
-            mView.failure("token值为空");
-            System.out.println("token值为空");
-            return;
-        }
+        System.out.println(uid+"follwid====="+followid);
+
         if(TextUtils.isEmpty(uid))
         {
             mView.failure("uid为空");
@@ -81,8 +76,8 @@ mView.hidLoading();
         }
         Map<String,String> map=new HashMap<>();
         map.put("uid",uid);
-        map.put("followid",followid);
-        map.put("token",token);
+        map.put("followId",followid);
+
         attentionInfoModel.getUserInfo(map, new BaseCallBackShowLodding() {
             @Override
             public void loadSucess(Object data) {

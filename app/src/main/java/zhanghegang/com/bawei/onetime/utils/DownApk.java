@@ -148,7 +148,7 @@ public class DownApk {
                         System.out.println(TAGDOWN+"total-----"+total);
                         if(onBackProCess!=null)
                         {
-                            int progress= (int) (((float)(allSize/contentLength))*100);
+
 
                             onBackProCess.onBack(len);
                         }

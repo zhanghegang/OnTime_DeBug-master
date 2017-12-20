@@ -1,5 +1,6 @@
 package zhanghegang.com.bawei.onetime;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -212,13 +213,15 @@ showToast(msg);
         {
             showToast("关注成功");
             tvUserAttention.setSelected(true);
+            tvUserAttention.setTextColor(Color.WHITE);
         }
         else if("2".equals(code)){
             showToast("code为2");
-//            start(OtherRegActivity.class,true);
+            start(OtherRegActivity.class,true);
 
         }
         else {
+            tvUserAttention.setTextColor(Color.WHITE);
             tvUserAttention.setSelected(true);
             showToast("用户已关注");
         }
@@ -258,7 +261,8 @@ page++;
         switch (v.getId())
         {
             case R.id.tv_user_attention:
-userInterfacePresenter.getAttentionInfo(uid);
+                System.out.println("uid=========="+uid);
+                userInterfacePresenter.getAttentionInfo(uid);
                 break;
         }
     }
