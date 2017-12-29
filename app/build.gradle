@@ -14,15 +14,19 @@ android {
     defaultConfig {
         applicationId "com.onetime.platform"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 22
         versionCode 300
         versionName "3.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 GETUI_APP_ID    : "rQ3Iz7Sp5J9ftXcgRJfL8",
                 GETUI_APP_KEY   : "rMVkqsvm4S9MMd8ppncv79",
                 GETUI_APP_SECRET: "iZGt1o1pUc8jihjOLckwb4"
         ]
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86","armeabi64-v8a"
+        }
 
 
     }
@@ -36,6 +40,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    useLibrary 'org.apache.http.legacy'
 }
 repositories {
     flatDir {
@@ -126,4 +131,12 @@ dependencies {
 
     //greenDao
     compile 'org.greenrobot:greendao:3.1.0'
+
+
+    //Optional compile for GCM (Google Cloud Messaging).
+    //noinspection GradleCompatible
+    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+    compile 'com.hyphenate:hyphenate-sdk:3.3.0'
+
+
 }

@@ -11,6 +11,7 @@ public class RegBean extends BaseReg{
 
    public String token;
    public String uid;
+   public String password;
 
 
 }

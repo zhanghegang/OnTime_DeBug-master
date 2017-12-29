@@ -1,29 +1,30 @@
 package zhanghegang.com.bawei.onetime;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kson.slidingmenu.SlidingMenu;
 
-
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import zhanghegang.com.bawei.onetime.autoview.NoDrawLayout;
 import zhanghegang.com.bawei.onetime.autoview.UpdateTitleView;
 import zhanghegang.com.bawei.onetime.base.BaseActivity;
-import zhanghegang.com.bawei.onetime.base.BasePresenter;
 import zhanghegang.com.bawei.onetime.bean.UserInfo;
 import zhanghegang.com.bawei.onetime.fragment.DuanziFragment;
+import zhanghegang.com.bawei.onetime.fragment.FindFragment;
 import zhanghegang.com.bawei.onetime.fragment.LeftFragment;
 import zhanghegang.com.bawei.onetime.fragment.TuijianFragment;
 import zhanghegang.com.bawei.onetime.fragment.VedioFragment;
@@ -55,6 +56,12 @@ public class MainActivity extends BaseActivity<GetUserInfoPresenter> implements 
     ImageView ivDuanzi;
     @BindView(R.id.iv_vedio)
     ImageView ivVedio;
+    @BindView(R.id.iv_find)
+    ImageView ivFind;
+    @BindView(R.id.tv_find)
+    TextView tvFind;
+    @BindView(R.id.ll_find)
+    LinearLayout llFind;
 //    @BindView(R.id.fl_left)
 //    FrameLayout flLeft;
 //    @BindView(R.id.dl_pager)
@@ -65,11 +72,12 @@ public class MainActivity extends BaseActivity<GetUserInfoPresenter> implements 
     private TuijianFragment tuijianFragment;
     private DuanziFragment duanziFragment;
     private VedioFragment vedioFragment;
+    private FindFragment findFragment;
 
 
     @Override
     public GetUserInfoPresenter initPresenter() {
-        getUserInfoPresenter = new GetUserInfoPresenter(this,this);
+        getUserInfoPresenter = new GetUserInfoPresenter(this, this);
         return getUserInfoPresenter;
     }
 
@@ -90,41 +98,40 @@ public class MainActivity extends BaseActivity<GetUserInfoPresenter> implements 
         tuijianFragment = new TuijianFragment();
         duanziFragment = new DuanziFragment();
         vedioFragment = new VedioFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_main,tuijianFragment).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_main,duanziFragment).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_main,vedioFragment).commit();
-
+        findFragment = new FindFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_main, tuijianFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_main, duanziFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_main, vedioFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_main, findFragment).commit();
         getSupportFragmentManager().beginTransaction().hide(duanziFragment).commit();
         getSupportFragmentManager().beginTransaction().hide(vedioFragment).commit();
+        getSupportFragmentManager().beginTransaction().hide(findFragment).commit();
         setBottom(1);
         setLeft();
 
 
     }
-    boolean flag=false;
+
+    boolean flag = false;
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if(slidingMenu!=null&&slidingMenu.isMenuShowing())
-        {
+        if (slidingMenu != null && slidingMenu.isMenuShowing()) {
             slidingMenu.toggle();
-        }
-        else {
+        } else {
 
-            if(flag==false)
-            {
-                flag=true;
-                showToast( "再次点击.退出一刻钟");
-                Timer timer=new Timer();
-                TimerTask timerTask=new TimerTask() {
+            if (flag == false) {
+                flag = true;
+                showToast("再次点击.退出一刻钟");
+                Timer timer = new Timer();
+                TimerTask timerTask = new TimerTask() {
                     @Override
                     public void run() {
-                        flag=false;
+                        flag = false;
                     }
                 };
-                timer.schedule(timerTask,2000);
-            }
-            else {
+                timer.schedule(timerTask, 2000);
+            } else {
                 finish();
                 System.exit(0);
             }
@@ -138,15 +145,15 @@ public class MainActivity extends BaseActivity<GetUserInfoPresenter> implements 
     @Override
     protected void onResume() {
         super.onResume();
-presenter.getUserInfo();
+        presenter.getUserInfo();
     }
 
     private void setLeft() {
         slidingMenu = new SlidingMenu(this);
         slidingMenu.setMenu(R.layout.left_sliding);
 
-       LeftFragment leftFragment= new LeftFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_slding_left,leftFragment).commit();
+        LeftFragment leftFragment = new LeftFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_slding_left, leftFragment).commit();
 
         slidingMenu.setMode(SlidingMenu.LEFT);
         //设置边缘滑动
@@ -155,7 +162,7 @@ presenter.getUserInfo();
         slidingMenu.setBehindOffsetRes(R.dimen.margin);
         slidingMenu.setBehindScrollScale(0);
 
-        slidingMenu.attachToActivity(this,SlidingMenu.SLIDING_CONTENT);
+        slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 
     }
 
@@ -166,38 +173,43 @@ presenter.getUserInfo();
     }
 
 
-    @OnClick({R.id.ll_tuijian, R.id.ll_duanzi, R.id.ll_video})
+    @OnClick({R.id.ll_tuijian, R.id.ll_duanzi, R.id.ll_video, R.id.ll_find})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_tuijian:
 
 
-
                 getSupportFragmentManager().beginTransaction().show(tuijianFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(duanziFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(vedioFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(findFragment).commit();
                 setBottom(1);
 
                 break;
             case R.id.ll_duanzi:
 
 
-
-
                 getSupportFragmentManager().beginTransaction().hide(tuijianFragment).commit();
                 getSupportFragmentManager().beginTransaction().show(duanziFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(vedioFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(findFragment).commit();
                 setBottom(2);
                 break;
             case R.id.ll_video:
 
-
-
-
                 getSupportFragmentManager().beginTransaction().hide(tuijianFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(duanziFragment).commit();
                 getSupportFragmentManager().beginTransaction().show(vedioFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(findFragment).commit();
                 setBottom(3);
+                break;
+            case R.id.ll_find:
+                getSupportFragmentManager().beginTransaction().hide(tuijianFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(duanziFragment).commit();
+                getSupportFragmentManager().beginTransaction().show(findFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(vedioFragment).commit();
+                setBottom(4);
+
                 break;
         }
     }
@@ -210,7 +222,14 @@ presenter.getUserInfo();
         tvDianzi.setTextColor(Color.BLACK);
         ivVedio.setImageResource(R.drawable.video_normal);
         tvVedio.setTextColor(Color.BLACK);
+        ivFind.setImageResource(R.drawable.find_normal);
+        tvFind.setTextColor(Color.BLACK);
         int color = getResources().getColor(R.color.main_head);
+        if (flag == 4) {
+            updateTitle.setVisibility(View.GONE);
+        } else {
+            updateTitle.setVisibility(View.VISIBLE);
+        }
         if (flag == 1) {
             updateTitle.setTitle("推荐");
             ivTuijian.setImageResource(R.drawable.tuijian_select);
@@ -224,6 +243,10 @@ presenter.getUserInfo();
             updateTitle.setTitle("视频");
             ivVedio.setImageResource(R.drawable.video_select);
             tvVedio.setTextColor(color);
+        } else if (flag == 4) {
+            updateTitle.setTitle("发现");
+            ivFind.setImageResource(R.drawable.find_selector);
+            tvFind.setTextColor(color);
         }
 
 
@@ -231,15 +254,12 @@ presenter.getUserInfo();
 
     @Override
     public void userHeadImage() {
-        if(slidingMenu!=null)
-        {
-        if(slidingMenu.isMenuShowing())
-        {
-            slidingMenu.toggle();
-        }
-        else {
-            slidingMenu.showMenu();
-        }
+        if (slidingMenu != null) {
+            if (slidingMenu.isMenuShowing()) {
+                slidingMenu.toggle();
+            } else {
+                slidingMenu.showMenu();
+            }
         }
 
 
@@ -247,7 +267,7 @@ presenter.getUserInfo();
 
     @Override
     public void writerImage() {
-start(WriterStatinActivity.class,false);
+        start(WriterStatinActivity.class, false);
     }
 
 
@@ -263,7 +283,7 @@ start(WriterStatinActivity.class,false);
 
     @Override
     public void failure(String msg) {
-showToast(msg);
+        showToast(msg);
     }
 
     @Override
@@ -278,6 +298,13 @@ showToast(msg);
 //        }
         UserInfo.DataBean userInfo = ((UserInfo) data).getData();
         String icon = userInfo.getIcon();
-        updateTitle.setheadImage(this,icon);
+        updateTitle.setheadImage(this, icon);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

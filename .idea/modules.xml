@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://D:\a\OnTime-master\OnTime.iml" filepath="D:\a\OnTime-master\OnTime.iml" />
-      <module fileurl="file://D:\a\publicproject\player\OnTime_DeBug-master\OnTime-master.iml" filepath="D:\a\publicproject\player\OnTime_DeBug-master\OnTime-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/OnTime_DeBug-master.iml" filepath="$PROJECT_DIR$/OnTime_DeBug-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/multi-image-selector/multi-image-selector.iml" filepath="$PROJECT_DIR$/multi-image-selector/multi-image-selector.iml" />

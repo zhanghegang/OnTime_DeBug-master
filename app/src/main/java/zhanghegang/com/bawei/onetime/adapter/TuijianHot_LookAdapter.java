@@ -73,73 +73,75 @@ public class TuijianHot_LookAdapter extends RecyclerView.Adapter<TuijianHot_Look
 
         return myViewHolder;
     }
-public interface UidOnClick{
-        void onUidClik(String uid);
-}
-public void setUidOnClik(UidOnClick uidOnClik){
-        this.onUidClick=uidOnClik;
 
-}
+    public interface UidOnClick {
+        void onUidClik(String uid);
+    }
+
+    public void setUidOnClik(UidOnClick uidOnClik) {
+        this.onUidClick = uidOnClik;
+
+    }
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
 
         final VideosBean.DataBean dataBean = list.get(position);
-if(dataBean!=null)
-{
-    List<VideosBean.DataBean.CommentsBean> comments = dataBean.getComments();
-    Comment_Adapter comment_adapter=new Comment_Adapter(context,comments);
-    holder.rcv_video_comment_list.setLayoutManager(new LinearLayoutManager(context));
-    holder.rcv_video_comment_list.setAdapter(comment_adapter);
+        if (dataBean != null) {
+            List<VideosBean.DataBean.CommentsBean> comments = dataBean.getComments();
+            Comment_Adapter comment_adapter = new Comment_Adapter(context, comments);
+            holder.rcv_video_comment_list.setLayoutManager(new LinearLayoutManager(context));
+            holder.rcv_video_comment_list.setAdapter(comment_adapter);
 
 
-    holder.ivHotUserhead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onUidClick.onUidClik(dataBean.getUid()+"");
+            holder.ivHotUserhead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onUidClick.onUidClik(dataBean.getUid() + "");
 //                context.startActivity(new Intent(context, UserInterfaceActivity.class));
+                }
+            });
+            final String cover = dataBean.getCover();
+
+            String createTime = dataBean.getCreateTime();
+            String nickname = dataBean.getUser().getNickname();
+            String icon = dataBean.getUser().getIcon();
+            if (!TextUtils.isEmpty(icon)) {
+                holder.ivHotUserhead.setImageURI(Uri.parse(icon));
             }
-        });
-        final String cover = dataBean.getCover();
+            if (!TextUtils.isEmpty(createTime)) {
+                holder.tvDuanziTime.setText(createTime + "");
+            }
+            if (!TextUtils.isEmpty(nickname)) {
+                holder.tvDuanziName.setText(nickname);
+            }
 
-        String createTime = dataBean.getCreateTime();
-      String nickname = dataBean.getUser().getNickname();
-        String icon = dataBean.getUser().getIcon();
-        if (!TextUtils.isEmpty(icon)) {
-            holder.ivHotUserhead.setImageURI(Uri.parse(icon));
-
-        }
-        holder.tvDuanziTime.setText(createTime + "");
-        holder.tvDuanziName.setText(nickname);
-        String workDesc = dataBean.getWorkDesc();
-        if(!TextUtils.isEmpty(workDesc))
-        {
-            holder.tvHotTitle.setText(workDesc);
-        }
+            String workDesc = dataBean.getWorkDesc();
+            if (!TextUtils.isEmpty(workDesc)) {
+                holder.tvHotTitle.setText(workDesc);
+            }
 
 //        String url = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
-        String videoUrl = dataBean.getVideoUrl();
-        System.out.println(videoUrl+"==========videourl======cover==="+cover);
+            String videoUrl = dataBean.getVideoUrl();
+            System.out.println(videoUrl + "==========videourl======cover===" + cover);
 
-        if(!TextUtils.isEmpty(videoUrl))
-        {
-            String[] split = videoUrl.split("cn");
+            if (!TextUtils.isEmpty(videoUrl)) {
+                String[] split = videoUrl.split("cn");
+                videoUrl = "http://120.27.23.105/" + split[1];
+                if (!TextUtils.isEmpty(videoUrl)) {
+                    boolean b = holder.jc.setUp(videoUrl, JCVideoPlayer.SCREEN_LAYOUT_LIST, "");
+                    if (b) {
+                        holder.jc.thumbImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                        if (!TextUtils.isEmpty(cover)) {
+                            Glide.with(context).load(cover).into(holder.jc.thumbImageView);
+                        }
 
-            videoUrl="http://120.27.23.105/"+split[1];
-            boolean b = holder.jc.setUp(videoUrl, JCVideoPlayer.SCREEN_LAYOUT_LIST, "");
-            if(b)
-            {
-                holder.jc.thumbImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-               if(!TextUtils.isEmpty(cover))
-               {
-                   Glide.with(context).load(cover).into(holder.jc.thumbImageView);
-               }
-
+                    }
+                }
             }
+
         }
-
-}
-
 
 
         if (map.get(position)) {

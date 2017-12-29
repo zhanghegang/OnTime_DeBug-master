@@ -10,12 +10,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import zhanghegang.com.bawei.onetime.base.BaseActivity;
 import zhanghegang.com.bawei.onetime.presenter.RegPresenter;
+import zhanghegang.com.bawei.onetime.utils.SharePrefrenceUtils;
 import zhanghegang.com.bawei.onetime.view.RegView;
 
 public class ReginPhoneActivity extends BaseActivity<RegPresenter> implements RegView {
@@ -77,8 +80,13 @@ public class ReginPhoneActivity extends BaseActivity<RegPresenter> implements Re
 
     @Override
     public void sucReg(Object data) {
+        String user = etUser.getText().toString().trim();
+        String pass = etPass.getText().toString().trim();
         if (data.equals("0")) {
+
+            SharePrefrenceUtils.putData("huanxin",false);
             start(OtherRegActivity.class, true);
+
         } else {
             showToast("浪了，注册有误，请重新注册");
         }

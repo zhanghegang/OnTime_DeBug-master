@@ -28,8 +28,11 @@ public class StatinPresenter extends BasePresenter<SatinView> {
             @Override
             public void loadSucess(Object data) {
                 if(data!=null)
-                {
+                { System.out.println("=====presenter=success=====list_statin============");
                     mView.statinSuc(data);
+                }
+                else {
+                    System.out.println("=====presenter=failure=====list_statin============");
                 }
             }
 

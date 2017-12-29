@@ -79,20 +79,21 @@ public class DownApk {
                             int startIndex =0;
                             int endIndex=0;
                             startIndex= (int) (blockSize*i);
-                            endIndex= (int) (blockSize*(i+1))-1;
+                            endIndex= (int) blockSize*(i+1);
                             if(i==threadCount-1)
                             {
-                                endIndex= (int) (contentLength -1);
+                                endIndex= (int) (contentLength-1);
                             }
                             VerSionDownTable load = verSionDownTableDao.load((long) (i+1));
 //                            Long id = load.getId();
 //                            System.out.println("数据库===id======="+id);
-                            if(load!=null)
-                            {
-                                System.out.println("数据库=========="+startIndex+"========"+endIndex);
-                                startIndex = load.getStartIndex();
-                               endIndex=load.getEndIndex();
-                            }
+//                            if(load!=null)
+//                            {
+//
+//                                startIndex = load.getStartIndex();
+//                               endIndex=load.getEndIndex();
+//                                System.out.println("数据库=========="+startIndex+"========"+endIndex);
+//                            }
                           downBolock(startIndex,endIndex,"thread"+i,i+1);
 
                         }
@@ -109,7 +110,8 @@ public class DownApk {
     private long allSize=0;
     public void downBolock(final int startIndex, final int endIndex, final String name, final int key){
         OkHttpClient okHttpClient = getOkHttpClient();
-        final Request.Builder request=new Request.Builder().header("RANGE","bytes="+startIndex+"-"+endIndex).url(url);
+        System.out.println("down数据库======="+startIndex+"end"+endIndex);
+        final Request.Builder request=new Request.Builder().header("Range","bytes="+startIndex+"-"+endIndex).url(url);
         Request bolockRequest = request.build();
         final VerSionDownTableDao verSionDownTableDao = MyApp.getIntence().getDaoSession().getVerSionDownTableDao();
         VerSionDownTable load = verSionDownTableDao.load((long) key);
@@ -120,6 +122,7 @@ public class DownApk {
             version.setEndIndex(endIndex);
             version.setThreadId(name);
             verSionDownTableDao.insert(version);
+
         }
         okHttpClient.newCall(bolockRequest).enqueue(new Callback() {
             @Override
@@ -137,7 +140,7 @@ public class DownApk {
                     RandomAccessFile randomAccessFile=new RandomAccessFile(file,"rwd");
                     randomAccessFile.seek(startIndex);
                     InputStream inputStream = response.body().byteStream();
-                    byte[] buffer=new byte[64];
+                    byte[] buffer=new byte[1024];
                     int len=-1;
                     int total=0;
                     while ((len=inputStream.read(buffer))!=-1)
@@ -148,8 +151,6 @@ public class DownApk {
                         System.out.println(TAGDOWN+"total-----"+total);
                         if(onBackProCess!=null)
                         {
-
-
                             onBackProCess.onBack(len);
                         }
                         if(pause)

@@ -7,7 +7,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
@@ -199,17 +201,11 @@ showToast(msg);
 
     @Override
     public void sucData(Object data) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setDataAndType(Uri.fromFile(new File("/data/data/com.onetime.platform/files/onetime.apk")), "application/vnd.android.package-archive");
-        this.startActivity(intent);
+
         String msg = ((VerSionUpdateBean) data).getMsg();
         showToast(msg);
         VerSionUpdateBean.DataBean verSionInfo = ((VerSionUpdateBean) data).getData();
 
-//        builder1 = new AlertDialog.Builder(this)
-//                .setView(inflate);
-//        show1 = builder1.show();
 
         String versionCode = verSionInfo.getVersionCode();
         try {
@@ -221,10 +217,14 @@ showToast(msg);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        if(!versionCode.equals(vc+""))
+        if(versionCode.equals(vc+""))
         {
+            builder1 = new AlertDialog.Builder(this)
+                    .setView(inflate);
+            show1 = builder1.show();
+
             String apkUrl = verSionInfo.getApkUrl();
-            file = new File("/data/data/com.onetime.platform/files/onetime.apk");
+            file = new File(Environment.getExternalStorageDirectory()+"/onetime.apk");
             if(!file.exists())
             {
                 try {
@@ -236,7 +236,7 @@ showToast(msg);
             ///data/data/com.onetime.platform/files/onetime.apk
             ///data/data/com.onetime.platform/files/onetime.apk
             System.out.println(this.getFilesDir()+"downFile========"+ file.getName());
-            downApk = new DownApk(apkUrl,2,this, file);
+            downApk = new DownApk("http://wap.apk.anzhi.com/apk/201405/21/com.jb.azsingle.dbciie_28186058.apk",1,this, file);
             downApk.setOnBackProCess(this);
       downApk.downNewVersion();
         }
@@ -293,12 +293,22 @@ total+=current;
             if(progress==100)
             {
                 System.out.println("progress========100");
-//               show1.dismiss();
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setDataAndType(Uri.fromFile(new File("/data/data/com.onetime.platform/files/onetime.apk")), "application/vnd.android.package-archive");
-                this.startActivity(intent);
+               show1.dismiss();
 
+      Intent intent = new Intent(Intent.ACTION_VIEW);
+
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+
+        Uri contentUri = null;
+        File file = new File(Environment.getExternalStorageDirectory()+"/onetime.apk");
+        System.out.println("filePathMainActivity=========="+file.getAbsolutePath());
+//        contentUri = FileProvider.getUriForFile(this,  "com.onetime.platform.provider", file);
+
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+       startActivity(intent);
             }
         }
     }

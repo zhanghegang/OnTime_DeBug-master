@@ -99,6 +99,28 @@ android:orientation="vertical"
             android:background="?android:attr/selectableItemBackground"
             android:padding="3dp"
             android:gravity="center"
+            android:id="@+id/ll_find"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="55dp">
+            <ImageView
+                android:id="@+id/iv_find"
+                android:src="@drawable/find_normal"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:textSize="13sp"
+                android:id="@+id/tv_find"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发现"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="3dp"
+            android:gravity="center"
             android:id="@+id/ll_video"
             android:layout_weight="1"
             android:layout_width="0dp"

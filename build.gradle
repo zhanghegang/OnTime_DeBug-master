@@ -23,6 +23,8 @@ allprojects {
         maven {
             url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/"
         }
+        maven { url "https://raw.githubusercontent.com/HyphenateInc/Hyphenate-SDK-Android/master/repository" }
+
     }
 }
 

@@ -37,22 +37,22 @@ import zhanghegang.com.bawei.onetime.bean.StatinBean;
 public class StatinAdapter extends RecyclerView.Adapter<StatinAdapter.MyViewHolder> {
     public Context context;
     public List<StatinBean.DataBean> list;
-public Map<Integer,Boolean> map;
+    public Map<Integer, Boolean> map;
     private View view;
-    boolean flag=true;
+    boolean flag = true;
 
 
-    public StatinAdapter(Context context, List<StatinBean.DataBean> list,Map<Integer,Boolean> map) {
+    public StatinAdapter(Context context, List<StatinBean.DataBean> list, Map<Integer, Boolean> map) {
         this.context = context;
         this.list = list;
-      this.map=map;
+        this.map = map;
 
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         view = LayoutInflater.from(context).inflate(R.layout.duanzi_item, null);
-       MyViewHolder myViewHolder = new MyViewHolder(view);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
 
         return myViewHolder;
     }
@@ -61,96 +61,101 @@ public Map<Integer,Boolean> map;
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
 
-    StatinBean.DataBean statinBean = list.get(position);
-    String imgUrls = (String) statinBean.getImgUrls();
-    String createTime = statinBean.getCreateTime();
+        StatinBean.DataBean statinBean = list.get(position);
+        String imgUrls = (String) statinBean.getImgUrls();
+        String createTime = statinBean.getCreateTime();
 
-    String content = statinBean.getContent();
-    StatinBean.DataBean.UserBean user = statinBean.getUser();
-    String icon = user.getIcon();
-    String nickname = user.getNickname();
-    if (!TextUtils.isEmpty(icon)) {
-        System.out.println("icon============" + icon);
-        holder.ivDuanziUserhead.setImageURI(Uri.parse(icon));
-    }
-    holder.tvDuanziName.setText(nickname);
-    holder.tvDuanziTime.setText(createTime);
-    holder.tvDuanziContent.setText(content);
-    if (!TextUtils.isEmpty(imgUrls)) {
-        String[] split = imgUrls.split("\\|");
-        if (split.length < 3) {
-            holder.rcv_statin_img.setLayoutManager(new GridLayoutManager(context, split.length));
+        String content = statinBean.getContent();
+        StatinBean.DataBean.UserBean user = statinBean.getUser();
+        String icon = user.getIcon();
+        String nickname = user.getNickname();
+        if (!TextUtils.isEmpty(icon)) {
+            System.out.println("icon============" + icon);
+            holder.ivDuanziUserhead.setImageURI(Uri.parse(icon));
+        }
+        if (!TextUtils.isEmpty(nickname)) {
+            holder.tvDuanziName.setText(nickname);
+        }
+        if (!TextUtils.isEmpty(createTime)) {
+            holder.tvDuanziTime.setText(createTime);
+        }
+        if (!TextUtils.isEmpty(content)) {
+            holder.tvDuanziContent.setText(content);
+        }
+
+        if (!TextUtils.isEmpty(imgUrls)) {
+            String[] split = imgUrls.split("\\|");
+            if (split.length < 3) {
+                holder.rcv_statin_img.setLayoutManager(new GridLayoutManager(context, split.length));
+
+            } else {
+                holder.rcv_statin_img.setLayoutManager(new GridLayoutManager(context, 3));
+            }
+            StatinIMgeAdapter statinIMgeAdapter = new StatinIMgeAdapter(context, split);
+            holder.rcv_statin_img.setAdapter(statinIMgeAdapter);
+        } else {
+            holder.rcv_statin_img.setVisibility(View.GONE);
+        }
+
+
+        final Object commentNum = list.get(position).getCommentNum();
+        final Object praiseNum = list.get(position).getPraiseNum();
+        final Object shareNum = list.get(position).getShareNum();
+
+        if (commentNum != null) {
+            holder.tvMsg.setText(commentNum + "");
+        }
+        if (shareNum != null) {
+            holder.tvDuanziShare.setText(shareNum + "");
+        }
+        if (praiseNum != null) {
+            holder.tvDuanziGuanzhu.setText(praiseNum + "");
+        }
+
+        if (commentNum == null && praiseNum == null && shareNum == null) {
+            holder.tvMsg.setText(0 + "");
+            holder.tvDuanziShare.setText(0 + "");
+            holder.tvDuanziGuanzhu.setText(0 + "");
+        }
+        if (map.get(position)) {
+            holder.ivDuanziJia.setImageResource(R.drawable.item_jian);
+            holder.llDuanziGuanzhu.setVisibility(View.VISIBLE);
+            holder.llDuanziMsg.setVisibility(View.VISIBLE);
+            holder.llDuanziShare.setVisibility(View.VISIBLE);
+            Animator animator = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_ll_translatex);
+            Animator animator2 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_ll_translatex2);
+            Animator animator3 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_ll_translatex3);
+            animator.setTarget(holder.llDuanziGuanzhu);
+            animator2.setTarget(holder.llDuanziShare);
+            animator3.setTarget(holder.llDuanziMsg);
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.play(animator).with(animator2).with(animator3);
+            animatorSet.start();
 
         } else {
-            holder.rcv_statin_img.setLayoutManager(new GridLayoutManager(context, 3));
+            map.put(position, false);
+            holder.ivDuanziJia.setImageResource(R.drawable.item_jia);
+            holder.llDuanziGuanzhu.setVisibility(View.GONE);
+            holder.llDuanziMsg.setVisibility(View.GONE);
+            holder.llDuanziShare.setVisibility(View.GONE);
         }
-        StatinIMgeAdapter statinIMgeAdapter = new StatinIMgeAdapter(context, split);
-        holder.rcv_statin_img.setAdapter(statinIMgeAdapter);
-    } else {
-        holder.rcv_statin_img.setVisibility(View.GONE);
-    }
+        holder.llDuanziJia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(position + "position==========" + map.get(position));
 
 
-    final Object commentNum = list.get(position).getCommentNum();
-    final Object praiseNum = list.get(position).getPraiseNum();
-    final Object shareNum = list.get(position).getShareNum();
+                if (map.get(position) == false) {
+                    setAnim(holder, holder.getLayoutPosition());
+                    map.put(position, true);
+                } else {
 
-    if (commentNum != null) {
-        holder.tvMsg.setText(commentNum + "");
-    }
-    if (shareNum != null) {
-        holder.tvDuanziShare.setText(shareNum + "");
-    }
-    if (praiseNum != null) {
-        holder.tvDuanziGuanzhu.setText(praiseNum + "");
-    }
-
-    if (commentNum == null && praiseNum == null && shareNum == null) {
-        holder.tvMsg.setText(0 + "");
-        holder.tvDuanziShare.setText(0 + "");
-        holder.tvDuanziGuanzhu.setText(0 + "");
-    }
-    if (map.get(position)) {
-        holder.ivDuanziJia.setImageResource(R.drawable.item_jian);
-        holder.llDuanziGuanzhu.setVisibility(View.VISIBLE);
-        holder.llDuanziMsg.setVisibility(View.VISIBLE);
-        holder.llDuanziShare.setVisibility(View.VISIBLE);
-        Animator animator = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_ll_translatex);
-        Animator animator2 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_ll_translatex2);
-        Animator animator3 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_ll_translatex3);
-        animator.setTarget(holder.llDuanziGuanzhu);
-        animator2.setTarget(holder.llDuanziShare);
-        animator3.setTarget(holder.llDuanziMsg);
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(animator).with(animator2).with(animator3);
-        animatorSet.start();
-
-    } else {
-        map.put(position, false);
-        holder.ivDuanziJia.setImageResource(R.drawable.item_jia);
-        holder.llDuanziGuanzhu.setVisibility(View.GONE);
-        holder.llDuanziMsg.setVisibility(View.GONE);
-        holder.llDuanziShare.setVisibility(View.GONE);
-    }
-    holder.llDuanziJia.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            System.out.println(position + "position==========" + map.get(position));
-
-
-            if (map.get(position) == false) {
-                setAnim(holder, holder.getLayoutPosition());
-                map.put(position, true);
-            } else {
-
-                setAnimin(holder, holder.getLayoutPosition());
-                map.put(position, false);
+                    setAnimin(holder, holder.getLayoutPosition());
+                    map.put(position, false);
+                }
             }
-        }
-    });
-}
-
-
+        });
+    }
 
 
     @Override
@@ -160,42 +165,43 @@ public Map<Integer,Boolean> map;
 
     /**
      * 退出动画
+     *
      * @param myViewHolder
      * @param position
      */
-    private void setAnimin(final MyViewHolder myViewHolder, int position){
-    //LinearLayout动画
-    Animator animator= AnimatorInflater.loadAnimator(context,R.animator.statin_anim_in);
-    Animator animator2= AnimatorInflater.loadAnimator(context,R.animator.statin_anim2_in);
-    Animator animator3= AnimatorInflater.loadAnimator(context,R.animator.statin_anim3_in);
-    Animator animator4= AnimatorInflater.loadAnimator(context,R.animator.statin_anim4);
+    private void setAnimin(final MyViewHolder myViewHolder, int position) {
+        //LinearLayout动画
+        Animator animator = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_in);
+        Animator animator2 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim2_in);
+        Animator animator3 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim3_in);
+        Animator animator4 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim4);
 
-    animator.setTarget(myViewHolder.llDuanziGuanzhu);
-    animator2.setTarget(myViewHolder.llDuanziShare);
-    animator3.setTarget(myViewHolder.llDuanziMsg);
-    animator4.setTarget(myViewHolder.ivDuanziJia);
+        animator.setTarget(myViewHolder.llDuanziGuanzhu);
+        animator2.setTarget(myViewHolder.llDuanziShare);
+        animator3.setTarget(myViewHolder.llDuanziMsg);
+        animator4.setTarget(myViewHolder.ivDuanziJia);
 //图片动画
-    Animator img1animator1= AnimatorInflater.loadAnimator(context,R.animator.statin_anim_img_in);
-    img1animator1.setTarget(myViewHolder.ivDuanziGuanzhu);
-    Animator img1animator2= AnimatorInflater.loadAnimator(context,R.animator.statin_anim_img_in);
-    img1animator2.setTarget(myViewHolder.ivDuanziShare);
-    Animator img1animator3= AnimatorInflater.loadAnimator(context,R.animator.statin_anim_img_in);
-    img1animator3.setTarget(myViewHolder.ivDuanziMsg);
+        Animator img1animator1 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_img_in);
+        img1animator1.setTarget(myViewHolder.ivDuanziGuanzhu);
+        Animator img1animator2 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_img_in);
+        img1animator2.setTarget(myViewHolder.ivDuanziShare);
+        Animator img1animator3 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_img_in);
+        img1animator3.setTarget(myViewHolder.ivDuanziMsg);
 
 //动画集合让所有动画同时执行
-    AnimatorSet animatorSet=new AnimatorSet();
-    animatorSet.play(animator).with(animator2).with(animator3).with(animator4).with(img1animator1).with(img1animator2).with(img1animator3);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(animator).with(animator2).with(animator3).with(animator4).with(img1animator1).with(img1animator2).with(img1animator3);
 
-    animatorSet.addListener(new Animator.AnimatorListener() {
-        @Override
-        public void onAnimationStart(Animator animation) {
-            System.out.println("=========jia");
-            //修改图片
-            myViewHolder.ivDuanziJia.setImageResource(R.drawable.item_jia);
-        }
+        animatorSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                System.out.println("=========jia");
+                //修改图片
+                myViewHolder.ivDuanziJia.setImageResource(R.drawable.item_jia);
+            }
 
-        @Override
-        public void onAnimationEnd(Animator animation) {
+            @Override
+            public void onAnimationEnd(Animator animation) {
 //                if(commentNum!=null)
 //                {
 //                    tvMsg.setText(commentNum+"");
@@ -203,24 +209,25 @@ public Map<Integer,Boolean> map;
 //                else {
 //                    tvMsg.setText(0+"");
 //                }
-        }
+            }
 
-        @Override
-        public void onAnimationCancel(Animator animation) {
+            @Override
+            public void onAnimationCancel(Animator animation) {
 
-        }
+            }
 
-        @Override
-        public void onAnimationRepeat(Animator animation) {
+            @Override
+            public void onAnimationRepeat(Animator animation) {
 
-        }
-    });
-    animatorSet.start();
+            }
+        });
+        animatorSet.start();
 
-}
+    }
 
     /**
      * 图片进入动画
+     *
      * @param myViewHolder
      * @param position
      */
@@ -231,11 +238,11 @@ public Map<Integer,Boolean> map;
         myViewHolder.llDuanziMsg.setVisibility(View.VISIBLE);
         myViewHolder.llDuanziShare.setVisibility(View.VISIBLE);
         //linearLayout动画
-        Animator animator= AnimatorInflater.loadAnimator(context,R.animator.statin_anim);
+        Animator animator = AnimatorInflater.loadAnimator(context, R.animator.statin_anim);
         animator.setTarget(myViewHolder.llDuanziGuanzhu);
-        Animator animator2= AnimatorInflater.loadAnimator(context,R.animator.statin_anim2);
-        Animator animator3= AnimatorInflater.loadAnimator(context,R.animator.statin_anim3);
-        Animator animator4= AnimatorInflater.loadAnimator(context,R.animator.statin_anim4);
+        Animator animator2 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim2);
+        Animator animator3 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim3);
+        Animator animator4 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim4);
 
 
         animator2.setTarget(myViewHolder.llDuanziShare);
@@ -244,15 +251,15 @@ public Map<Integer,Boolean> map;
 
 
 //图片动画
-        Animator img1animator1= AnimatorInflater.loadAnimator(context,R.animator.statin_anim_img);
+        Animator img1animator1 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_img);
         img1animator1.setTarget(myViewHolder.ivDuanziGuanzhu);
-        Animator img1animator2= AnimatorInflater.loadAnimator(context,R.animator.statin_anim_img);
+        Animator img1animator2 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_img);
         img1animator2.setTarget(myViewHolder.ivDuanziShare);
-        Animator img1animator3= AnimatorInflater.loadAnimator(context,R.animator.statin_anim_img);
+        Animator img1animator3 = AnimatorInflater.loadAnimator(context, R.animator.statin_anim_img);
         img1animator3.setTarget(myViewHolder.ivDuanziMsg);
 //修改图片
         myViewHolder.ivDuanziJia.setImageResource(R.drawable.item_jian);
-        AnimatorSet animatorSet=new AnimatorSet();
+        AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.play(animator).with(animator2).with(animator3).with(animator4).with(img1animator1).with(img1animator2).with(img1animator3);
         animatorSet.start();
         animatorSet.addListener(new Animator.AnimatorListener() {
@@ -313,9 +320,10 @@ public Map<Integer,Boolean> map;
         SimpleDraweeView ivDuanziUserhead;
         @BindView(R.id.rcv_statin_img)
         RecyclerView rcv_statin_img;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

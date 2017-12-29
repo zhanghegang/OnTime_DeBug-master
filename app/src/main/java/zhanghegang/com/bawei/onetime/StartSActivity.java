@@ -51,7 +51,7 @@ public class StartSActivity extends BaseActivity {
 llRightJiantou.setVisibility(View.GONE);
 
                 } else {
-                    animatorSet.start();
+//
                     ll_reg.setVisibility(View.GONE);
                     llRightJiantou.setVisibility(View.VISIBLE);
                 }
